@@ -1,5 +1,10 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
+;; Check if Mac OS (aka. Darwin)...
+(defvar linux-p (string-match "linux" (symbol-name system-type)))
+(defvar macosx-p (string-match "darwin" (symbol-name system-type)))
+(defvar windows-p (string-match "windows" (symbol-name system-type)))
+
 ;; "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 (global-set-key "\M-w" 'whitespace-mode)
@@ -7,7 +12,7 @@
 ;; KILL ALL THE BELLS!!!!!11
 (setq visible-bell t)
 
-;; Corrector horrografico en LaTeX
+;; Flyspell for LaTeX mode
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; Indent Fucking Whole Buffer
@@ -17,6 +22,8 @@
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
+
+(global-set-key "\M-i" 'iwb)
 
 ;; Ctrl+L : Goto Line
 (global-set-key "\C-l" 'goto-line)
@@ -33,6 +40,7 @@
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
 
 ;; Twitter follower twitter follower...
+(add-to-list 'load-path "~/.emacs.d/site-lisp/twittering-mode")
 (require 'twittering-mode)
 (setq twittering-use-master-password t)
 (setq twittering-timer-interval 300)
@@ -41,27 +49,26 @@
 (setq twittering-initial-timeline-spec-string
       '(":direct_messages"
         ":replies"
-	":home")
-)
-(add-hook 'twittering-new-tweets-hook (
-  lambda () (
-	     let ((n twittering-new-tweets-count))
-	      (start-process "twittering-notify" nil "notify-send"
-			     "-i" "/usr/share/emacs/23.3/etc/images/icons/hicolor/32x32/apps/emacs.xpm"
-			     "Twitter"
-			     (format "Hay %d nuevo%s tweet%s" n (if (> n 1) "s" "") (if (> n 1) "s" ""))
-	      )
-  )
-))
+        ":home")
+      )
 
-;; Doxymacs
-(add-hook 'c-mode-common-hook'doxymacs-mode)
-(defun my-doxymacs-font-lock-hook ()
-  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-      (doxymacs-font-lock)))
-(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+(if linux-p
+    (add-hook 'twittering-new-tweets-hook (
+                                           lambda () (
+                                                      let ((n twittering-new-tweets-count))
+                                                       (start-process "twittering-notify" nil "notify-send"
+                                                                      "-i" "/usr/share/emacs/23.3/etc/images/icons/hicolor/32x32/apps/emacs.xpm"
+                                                                      "Twitter"
+                                                                      (format "Hay %d nuevo%s tweet%s" n (if (> n 1) "s" "") (if (> n 1) "s" ""))
+                                                                      )
+                                                       )
+                                                  )
+              )
+  )
 
 ;; Auto-Complete
+(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -83,20 +90,21 @@
 ;; DIE TOOL BAR!!
 (tool-bar-mode -1)
 
-;; Flymake + Pyflakes
-
+;; Enable Flymake + Add Pyflakes for Python
 (when (load "flymake" t)
- (defun flymake-pyflakes-init ()
- (let* ((temp-file (flymake-init-create-temp-buffer-copy
- 'flymake-create-temp-inplace))
- (local-file (file-relative-name
- temp-file
- (file-name-directory buffer-file-name))))
- (list "pyflakes" (list local-file))))
- 
- (add-to-list 'flymake-allowed-file-name-masks
- '("\\.py\\'" flymake-pyflakes-init)))
- 
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakes" (list local-file))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)
+               )
+  )
+
 (add-hook 'find-file-hook 'flymake-find-file-hook)
 
 ;; Some styles
