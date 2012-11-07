@@ -1,9 +1,18 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
-;; Check if Mac OS (aka. Darwin)...
+;; Check OS
 (defvar linux-p (string-match "linux" (symbol-name system-type)))
 (defvar macosx-p (string-match "darwin" (symbol-name system-type)))
 (defvar windows-p (string-match "windows" (symbol-name system-type)))
+
+;; OS X options
+(if macosx-p
+    (setq mac-option-key-is-meta nil)
+    (setq mac-option-modifier 'none)
+    (setq mac-command-key-is-meta t)
+    (setq mac-command-modifier 'meta)
+    (setq x-select-enable-clipboard t)
+)
 
 ;; "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
@@ -87,6 +96,11 @@
 
 ;; DIE TOOL BAR!!
 (tool-bar-mode -1)
+
+;; Show scrollbar on OS X
+(if macosx-p
+    (scroll-bar-mode 1)
+)
 
 ;; Enable Flymake + Add Pyflakes for Python
 (when (load "flymake" t)
