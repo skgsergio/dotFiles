@@ -1,0 +1,6 @@
+[submodule ".emacs.d/site-lisp/emacs-color-theme-solarized"]
+	path = .emacs.d/site-lisp/emacs-color-theme-solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
+[submodule ".emacs.d/site-lisp/emacs-powerline"]
+	path = .emacs.d/site-lisp/emacs-powerline
+	url = git://github.com/jonathanchu/emacs-powerline.git
