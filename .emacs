@@ -1,18 +1,14 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
-;; Check OS
-(defvar linux-p (string-match "linux" (symbol-name system-type)))
-(defvar macosx-p (string-match "darwin" (symbol-name system-type)))
-(defvar windows-p (string-match "windows" (symbol-name system-type)))
-
 ;; OS X options
-(if macosx-p
-    (setq mac-option-key-is-meta nil)
-    (setq mac-option-modifier 'none)
-    (setq mac-command-key-is-meta t)
-    (setq mac-command-modifier 'meta)
-    (setq x-select-enable-clipboard t)
-)
+(defun set-osx-keys()
+  (setq mac-command-key-is-meta t)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-key-is-meta nil)
+  (setq mac-option-modifier 'none)
+  (setq x-select-enable-clipboard t))
+
+(if (eq system-type 'darwin) (set-osx-keys))
 
 ;; "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
@@ -57,21 +53,16 @@
       '(":direct_messages"
         ":replies"
         ":home")
-      )
+)
 
-(if linux-p
+(if (eq system-type 'gnu/linux)
     (add-hook 'twittering-new-tweets-hook (
                                            lambda () (
                                                       let ((n twittering-new-tweets-count))
                                                        (start-process "twittering-notify" nil "notify-send"
                                                                       "-i" "/usr/share/emacs/23.3/etc/images/icons/hicolor/32x32/apps/emacs.xpm"
                                                                       "Twitter"
-                                                                      (format "Hay %d nuevo%s tweet%s" n (if (> n 1) "s" "") (if (> n 1) "s" ""))
-                                                                      )
-                                                       )
-                                                  )
-              )
-  )
+                                                                      (format "%d new tweet%s" n (if (> n 1) "s" "")))))))
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
@@ -96,11 +87,6 @@
 
 ;; DIE TOOL BAR!!
 (tool-bar-mode -1)
-
-;; Show scrollbar on OS X
-(if macosx-p
-    (scroll-bar-mode 1)
-)
 
 ;; Enable Flymake + Add Pyflakes for Python
 (when (load "flymake" t)
