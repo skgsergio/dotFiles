@@ -31,8 +31,6 @@
 ;; Ctrl+U : Undo
 (global-set-key "\C-u" 'undo)
 
-;;;; PLUGINS ;;;;
-
 ;; Elpa repos
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -76,6 +74,7 @@
 (load "~/.emacs.d/site-lisp/nxhtml/autostart.el")
 
 ;; Theme
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
 (require 'color-theme-solarized)
 (color-theme-solarized-dark)
@@ -84,7 +83,6 @@
 ;; Poweline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
 (require 'powerline)
-
 (setq powerline-arrow-shape 'arrow)
 
 ;; DIE TOOL BAR!!
