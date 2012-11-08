@@ -33,9 +33,6 @@
 ;; Ctrl+L : Goto Line
 (global-set-key "\C-l" 'goto-line)
 
-;; Ctrl+U : Undo
-(global-set-key "\C-u" 'undo)
-
 ;; Elpa repos
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -49,6 +46,8 @@
 (setq twittering-timer-interval 300)
 (setq twittering-icon-mode t)
 (setq twittering-url-show-status nil)
+(setq twittering-use-native-retweet t)
+(setq twittering-retweet-format '"RT @%s: %t")
 (setq twittering-initial-timeline-spec-string
       '(":direct_messages"
         ":replies"
