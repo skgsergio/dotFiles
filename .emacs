@@ -71,6 +71,7 @@
 
 ;; nxHtml
 (load "~/.emacs.d/site-lisp/nxhtml/autostart.el")
+(setq mumamo-background-colors nil)
 
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
