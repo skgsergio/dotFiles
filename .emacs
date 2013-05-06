@@ -88,7 +88,7 @@
 ;; DIE TOOL BAR!!
 (tool-bar-mode -1)
 
-;; Enable Flymake + Add Pyflakes for Python
+;; Enable Flymake, Pyflakes, Chktex
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -101,6 +101,14 @@
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)
                )
+
+  (defun flymake-get-tex-args (file-name)
+    (list "chktex" (list "-g0" "-r" "-l" (expand-file-name "~/.chktexrc") "-I" "-q" "-v0" file-name)))
+
+  (push
+    '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
+     1 2 3 4) flymake-err-line-patterns)
+
   )
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
