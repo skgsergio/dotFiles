@@ -12,7 +12,10 @@
 
 ;; "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
-(global-set-key "\M-w" 'whitespace-mode)
+(global-set-key "\M-e" 'whitespace-mode)
+
+;; Line numbers
+(global-linum-mode 1)
 
 ;; KILL ALL THE BELLS!!!!!11
 (setq visible-bell t)
