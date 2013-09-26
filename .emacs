@@ -33,8 +33,11 @@
 
 (global-set-key "\M-i" 'iwb)
 
-;; Ctrl+L : Goto Line
+;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
+
+;; Ctrl+c Ctrl+f : Toggle flymake
+(global-set-key "\C-c\C-f" 'flymake-mode)
 
 ;; Elpa repos
 (require 'package)
