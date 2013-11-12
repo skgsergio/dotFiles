@@ -91,6 +91,11 @@
 (require 'powerline)
 (setq powerline-arrow-shape 'arrow)
 
+;; VIM-Modeline
+(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
+(require 'vim-modeline)
+(add-to-list 'find-file-hook 'vim-modeline/do)
+
 ;; DIE TOOL BAR!!
 (tool-bar-mode -1)
 
