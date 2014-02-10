@@ -79,6 +79,13 @@
 (load "~/.emacs.d/site-lisp/nxhtml/autostart.el")
 (setq mumamo-background-colors nil)
 
+;; html5-el
+(add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
+(eval-after-load "rng-loc"
+  '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
+
+(require 'whattf-dt)
+
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")

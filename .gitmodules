@@ -16,3 +16,6 @@
 [submodule ".emacs.d/site-lisp/vim-modeline"]
 	path = .emacs.d/site-lisp/vim-modeline
 	url = https://github.com/cinsk/emacs-vim-modeline.git
+[submodule ".emacs.d/site-lisp/html5-el"]
+	path = .emacs.d/site-lisp/html5-el
+	url = https://github.com/hober/html5-el.git
