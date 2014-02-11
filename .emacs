@@ -86,6 +86,11 @@
 
 (require 'whattf-dt)
 
+;; scss-mode
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
+(require 'scss-mode)
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")

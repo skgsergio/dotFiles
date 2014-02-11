@@ -19,3 +19,6 @@
 [submodule ".emacs.d/site-lisp/html5-el"]
 	path = .emacs.d/site-lisp/html5-el
 	url = https://github.com/hober/html5-el.git
+[submodule ".emacs.d/site-lisp/scss-mode"]
+	path = .emacs.d/site-lisp/scss-mode
+	url = https://github.com/antonj/scss-mode.git
