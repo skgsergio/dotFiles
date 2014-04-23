@@ -10,6 +10,9 @@
 
 (if (eq system-type 'darwin) (set-osx-keys))
 
+;; Remove trailing withespaces on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 (global-set-key "\M-e" 'whitespace-mode)
@@ -36,7 +39,7 @@
 ;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
 
-;; Ctrl+c Ctrl+f : Toggle flymake
+;; Ctrl+c f : Toggle flymake
 (global-set-key "\C-cf" 'flymake-mode)
 
 ;; Elpa repos
@@ -44,30 +47,6 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
-
-;; Twitter follower twitter follower...
-(add-to-list 'load-path "~/.emacs.d/site-lisp/twittering-mode")
-(require 'twittering-mode)
-(setq twittering-use-master-password t)
-(setq twittering-timer-interval 300)
-(setq twittering-icon-mode t)
-(setq twittering-url-show-status nil)
-(setq twittering-use-native-retweet t)
-(setq twittering-retweet-format '"RT @%s: %t")
-(setq twittering-initial-timeline-spec-string
-      '(":direct_messages"
-        ":replies"
-        ":home")
-)
-
-(if (eq system-type 'gnu/linux)
-    (add-hook 'twittering-new-tweets-hook (
-                                           lambda () (
-                                                      let ((n twittering-new-tweets-count))
-                                                       (start-process "twittering-notify" nil "notify-send"
-                                                                      "-i" "/usr/share/emacs/23.3/etc/images/icons/hicolor/32x32/apps/emacs.xpm"
-                                                                      "Twitter"
-                                                                      (format "%d new tweet%s" n (if (> n 1) "s" "")))))))
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
@@ -90,6 +69,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
 (require 'scss-mode)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
 
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")

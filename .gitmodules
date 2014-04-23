@@ -10,9 +10,6 @@
 [submodule ".emacs.d/site-lisp/popup-el"]
 	path = .emacs.d/site-lisp/popup-el
 	url = https://github.com/auto-complete/popup-el.git
-[submodule ".emacs.d/site-lisp/twittering-mode"]
-	path = .emacs.d/site-lisp/twittering-mode
-	url = https://github.com/hayamiz/twittering-mode.git
 [submodule ".emacs.d/site-lisp/vim-modeline"]
 	path = .emacs.d/site-lisp/vim-modeline
 	url = https://github.com/cinsk/emacs-vim-modeline.git
