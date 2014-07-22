@@ -28,13 +28,37 @@
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
-  "indent whole buffer"
+  "Indent whole buffer"
   (interactive)
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+  (untabify (point-min) (point-max))
+  (message "Indent buffer: Done.")
+  )
 
 (global-set-key "\M-i" 'iwb)
+
+;; Acute to html entities
+(defun acute2html ()
+  "Convert acutes to HTML entities"
+  (interactive)
+  (save-excursion
+    (dolist (c '(("á" . "&aacute;")
+                 ("é" . "&eacute;")
+                 ("í" . "&iacute;")
+                 ("ó" . "&oacute;")
+                 ("ú" . "&uacute;")
+                 ("ñ" . "&ntilde;")
+                 ("Á" . "&Aacute;")
+                 ("É" . "&Eacute;")
+                 ("Í" . "&Iacute;")
+                 ("Ó" . "&Oacute;")
+                 ("Ú" . "&Uacute;")
+                 ("Ñ" . "&Ntilde;")))
+      (goto-char (point-min))
+      (replace-string (car c) (cdr c)))
+    (message "Acute2html: Done."))
+  )
 
 ;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
@@ -69,7 +93,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
 (require 'scss-mode)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-;(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
+(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
 
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
@@ -109,7 +133,7 @@
     (list "chktex" (list "-g0" "-r" "-l" (expand-file-name "~/.chktexrc") "-I" "-q" "-v0" file-name)))
 
   (push
-    '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
+   '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
      1 2 3 4) flymake-err-line-patterns)
 
   )
