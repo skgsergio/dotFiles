@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Wraper for python linters with version check.
+#
+# Copyright 2014 - Sergio Conde <skgsergio@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+## Config
+
+DEFAULT_PYTHON="python2"
+#DEFAULT_PYTHON="python3"
+
+PYLINT_PY2="flake8-python2"
+PYLINT_PY3="flake8"
+
+
+## Do the magic
+
+PYCB=$(head -n1 ${*: -1} | grep ^#!)
+
+if [[ $PYCB =~ ^.*python3.*$ ]]; then
+    PYLINT=$PYLINT_PY3
+elif [[ $PYCB =~ ^.*python2.*$ ]]; then
+    PYLINT=$PYLINT_PY2
+else
+    if [ $DEFAULT_PYTHON == "python3" ]; then
+	PYLINT=$PYLINT_PY3
+    else
+	PYLINT=$PYLINT_PY2
+    fi
+fi
+
+$PYLINT $@
