@@ -80,7 +80,6 @@
 
 ;; nxHtml
 (load "~/.emacs.d/site-lisp/nxhtml/autostart.el")
-(setq mumamo-background-colors nil)
 
 ;; html5-el
 (add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
@@ -95,12 +94,10 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
 
-;; Theme
-(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
-(global-hl-line-mode t)
+;; Mumamo fixes
+(setq mumamo-per-buffer-local-vars
+      (delq 'buffer-file-name mumamo-per-buffer-local-vars))
+(setq mumamo-background-colors nil)
 
 ;; Poweline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
@@ -139,6 +136,13 @@
   )
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+;; Theme
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
+(require 'color-theme-solarized)
+(color-theme-solarized-dark)
+(global-hl-line-mode t)
 
 ;; Some styles
 (custom-set-faces
