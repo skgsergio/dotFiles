@@ -1,6 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
-;; OS X options
+;; OS X options (not using OS X anymore but...)
 (defun set-osx-keys()
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
@@ -13,18 +13,21 @@
 ;; Remove trailing withespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; "See" tabs
+;; Meta+e "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 (global-set-key "\M-e" 'whitespace-mode)
+
+;; Ctrl+l : Goto Line
+(global-set-key "\C-l" 'goto-line)
+
+;; Ctrl+c f : Toggle flymake
+(global-set-key "\C-cf" 'flymake-mode)
 
 ;; Line numbers
 (global-linum-mode 1)
 
 ;; KILL ALL THE BELLS!!!!!11
 (setq visible-bell t)
-
-;; Flyspell for LaTeX mode
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
@@ -60,13 +63,10 @@
     (message "Acute2html: Done."))
   )
 
-;; Ctrl+l : Goto Line
-(global-set-key "\C-l" 'goto-line)
+;; Flyspell for LaTeX mode
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
-;; Ctrl+c f : Toggle flymake
-(global-set-key "\C-cf" 'flymake-mode)
-
-;; Elpa repos
+;; Some elpa repos, just in case.
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -88,23 +88,23 @@
 
 (require 'whattf-dt)
 
-;; scss-mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
-(require 'scss-mode)
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
-
 ;; Mumamo fixes
 (setq mumamo-per-buffer-local-vars
       (delq 'buffer-file-name mumamo-per-buffer-local-vars))
 (setq mumamo-background-colors nil)
 
-;; Poweline
+;; scss-mode, life is easier with scss
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
+(require 'scss-mode)
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
+
+;; Poweline, add cuteness to emacs
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
 (require 'powerline)
 (setq powerline-arrow-shape 'arrow)
 
-;; VIM-Modeline
+;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)
 (add-to-list 'find-file-hook 'vim-modeline/do)
