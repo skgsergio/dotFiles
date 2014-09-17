@@ -99,6 +99,17 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
 
+;; Turtle RDF mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/ttl-mode")
+(autoload 'ttl-mode "ttl-mode" "Major mode for OWL or Turtle files" t)
+(add-hook 'ttl-mode-hook 'turn-on-font-lock)
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.n3" . ttl-mode)
+        '("\\.ttl" . ttl-mode))
+       auto-mode-alist))
+
 ;; Poweline, add cuteness to emacs
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
 (require 'powerline)
@@ -108,9 +119,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)
 (add-to-list 'find-file-hook 'vim-modeline/do)
-
-;; DIE TOOL BAR!!
-(tool-bar-mode -1)
 
 ;; Enable Flymake, Pyflakes, Chktex
 (when (load "flymake" t)
@@ -136,6 +144,9 @@
   )
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+;; DIE TOOL BAR!!
+(tool-bar-mode -1)
 
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
