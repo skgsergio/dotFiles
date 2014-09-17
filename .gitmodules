@@ -19,3 +19,6 @@
 [submodule ".emacs.d/site-lisp/scss-mode"]
 	path = .emacs.d/site-lisp/scss-mode
 	url = https://github.com/antonj/scss-mode.git
+[submodule ".emacs.d/site-lisp/sparql-mode"]
+	path = .emacs.d/site-lisp/sparql-mode
+	url = https://github.com/ljos/sparql-mode.git

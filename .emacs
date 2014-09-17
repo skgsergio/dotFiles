@@ -110,6 +110,12 @@
         '("\\.ttl" . ttl-mode))
        auto-mode-alist))
 
+;; SPARQL mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/sparql-mode")
+(autoload 'sparql-mode "sparql-mode.el" "Major mode for editing SPARQL files" t)
+(add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
+(add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
+
 ;; Poweline, add cuteness to emacs
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
 (require 'powerline)
