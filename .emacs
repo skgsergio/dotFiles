@@ -10,10 +10,19 @@
 
 (if (eq system-type 'darwin) (set-osx-keys))
 
-;; Remove trailing withespaces on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; No startup screen
+(setq inhibit-startup-screen t)
 
-;; Meta+e "See" tabs
+;; DIE TOOL BAR!!
+(tool-bar-mode -1)
+
+;; KILL ALL THE BELLS!!!!!11
+(setq visible-bell t)
+
+;; Line numbers
+(global-linum-mode 1)
+
+;; Meta+e : "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 (global-set-key "\M-e" 'whitespace-mode)
 
@@ -23,11 +32,11 @@
 ;; Ctrl+c f : Toggle flymake
 (global-set-key "\C-cf" 'flymake-mode)
 
-;; Line numbers
-(global-linum-mode 1)
+;; Remove trailing withespaces on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; KILL ALL THE BELLS!!!!!11
-(setq visible-bell t)
+;; Flyspell for LaTeX mode
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
@@ -63,14 +72,34 @@
     (message "Acute2html: Done."))
   )
 
-;; Flyspell for LaTeX mode
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-
 ;; Some elpa repos, just in case.
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
+
+;; Theme
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
+(require 'color-theme-solarized)
+(color-theme-solarized-dark)
+(global-hl-line-mode t)
+
+;; Poweline, add cuteness to emacs
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
+(require 'powerline)
+(setq powerline-arrow-shape 'arrow)
+
+(set-face-attribute 'mode-line nil
+		    :background "#9ACD32"
+		    :foreground "#030303"
+		    :inverse-video nil
+		    :box nil)
+(set-face-attribute 'mode-line-inactive nil
+		    :background "#1c1c1c"
+		    :foreground "#f9f9f9"
+		    :inverse-video nil
+		    :box nil)
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
@@ -116,10 +145,6 @@
 (add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
 (add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
 
-;; Poweline, add cuteness to emacs
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
-(require 'powerline)
-(setq powerline-arrow-shape 'arrow)
 
 ;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
@@ -150,28 +175,3 @@
   )
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
-
-;; DIE TOOL BAR!!
-(tool-bar-mode -1)
-
-;; Theme
-(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
-(global-hl-line-mode t)
-
-;; Some styles
-(custom-set-faces
- '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
- '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
-
-;; Some vars.
-(custom-set-variables
- '(ansi-color-names-vector ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(background-color "#fdf6e3")
- '(background-mode light)
- '(cursor-color "#657b83")
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
- '(foreground-color "#657b83")
- '(inhibit-startup-screen t))
