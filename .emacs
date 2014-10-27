@@ -91,15 +91,15 @@
 (setq powerline-arrow-shape 'arrow)
 
 (set-face-attribute 'mode-line nil
-		    :background "#9ACD32"
-		    :foreground "#030303"
-		    :inverse-video nil
-		    :box nil)
+                    :background "#9ACD32"
+                    :foreground "#030303"
+                    :inverse-video nil
+                    :box nil)
 (set-face-attribute 'mode-line-inactive nil
-		    :background "#1c1c1c"
-		    :foreground "#f9f9f9"
-		    :inverse-video nil
-		    :box nil)
+                    :background "#1c1c1c"
+                    :foreground "#f9f9f9"
+                    :inverse-video nil
+                    :box nil)
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
@@ -118,9 +118,13 @@
 (require 'whattf-dt)
 
 ;; Mumamo fixes
-(setq mumamo-per-buffer-local-vars
-      (delq 'buffer-file-name mumamo-per-buffer-local-vars))
 (setq mumamo-background-colors nil)
+(when (and (= emacs-major-version 24)
+           (>= emacs-minor-version 2))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+
 
 ;; scss-mode, life is easier with scss
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
