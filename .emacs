@@ -107,9 +107,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; nxHtml
-(load "~/.emacs.d/site-lisp/nxhtml/autostart.el")
-
 ;; html5-el
 (add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
 (eval-after-load "rng-loc"
@@ -117,13 +114,24 @@
 
 (require 'whattf-dt)
 
-;; Mumamo fixes
-(setq mumamo-per-buffer-local-vars
-      (delq 'buffer-file-name mumamo-per-buffer-local-vars))
-(setq mumamo-background-colors nil)
+;; web-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/web-mode")
+(require 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
 
 ;; scss-mode, life is easier with scss
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/scss-mode"))
+(add-to-list 'load-path "~/.emacs.d/site-lisp/scss-mode")
 (require 'scss-mode)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
