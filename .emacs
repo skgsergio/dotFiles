@@ -22,6 +22,9 @@
 ;; Line numbers
 (global-linum-mode 1)
 
+;; *~ files are useless, I always work over VCS
+(setq make-backup-files nil) 
+
 ;; Meta+e : "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 (global-set-key "\M-e" 'whitespace-mode)
