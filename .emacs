@@ -23,7 +23,7 @@
 (global-linum-mode 1)
 
 ;; *~ files are useless, I always work over VCS
-(setq make-backup-files nil) 
+(setq make-backup-files nil)
 
 ;; Meta+e : "See" tabs
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
@@ -80,6 +80,9 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
+
+;; Enable odt exporting in org-mode
+(require 'ox-odt)
 
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
@@ -155,7 +158,6 @@
 (autoload 'sparql-mode "sparql-mode.el" "Major mode for editing SPARQL files" t)
 (add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
 (add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
-
 
 ;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
