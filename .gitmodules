@@ -25,3 +25,6 @@
 [submodule ".emacs.d/site-lisp/web-mode"]
 	path = .emacs.d/site-lisp/web-mode
 	url = https://github.com/fxbois/web-mode
+[submodule ".emacs.d/site-lisp/emmet-mode"]
+	path = .emacs.d/site-lisp/emmet-mode
+	url = https://github.com/smihica/emmet-mode.git

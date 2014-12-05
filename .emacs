@@ -113,13 +113,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; html5-el
-(add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
-(eval-after-load "rng-loc"
-  '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
-
-(require 'whattf-dt)
-
 ;; web-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/web-mode")
 (require 'web-mode)
@@ -131,16 +124,30 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
+
+;; html5-el
+(add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
+(eval-after-load "rng-loc"
+  '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
+
+(require 'whattf-dt)
 
 ;; scss-mode, life is easier with scss
 (add-to-list 'load-path "~/.emacs.d/site-lisp/scss-mode")
 (require 'scss-mode)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
+
+;; Zen-coding/Emmet
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emmet-mode")
+(require 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 
 ;; Turtle RDF mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/ttl-mode")
