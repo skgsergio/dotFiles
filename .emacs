@@ -84,6 +84,16 @@
 ;; Enable odt exporting in org-mode
 (require 'ox-odt)
 
+;; Enable latex export in org-mode
+(require 'ox-latex)
+
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 ;; Theme
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
