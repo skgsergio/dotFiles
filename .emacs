@@ -38,8 +38,10 @@
 ;; Remove trailing withespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Flyspell for LaTeX mode
+;; Flyspell for LaTeX and Org mode
+(add-hook 'org-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
