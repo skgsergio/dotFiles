@@ -91,7 +91,6 @@
 
 ;; Enable latex export in org-mode
 (require 'ox-latex)
-
 (add-to-list 'org-latex-packages-alist '("" "minted"))
 (setq org-latex-listings 'minted)
 (setq org-latex-pdf-process
@@ -155,11 +154,13 @@
 
 (require 'whattf-dt)
 
-;; scss-mode, life is easier with scss
-(add-to-list 'load-path "~/.emacs.d/site-lisp/scss-mode")
-(require 'scss-mode)
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(setq scss-sass-command "~/.gem/ruby/2.1.0/bin/sass")
+;; less-css-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/less-css-mode")
+(require 'less-css-mode)
+(setq less-css-lessc-command (expand-file-name "~/node_modules/.bin/lessc"))
+(setq less-css-compile-at-save t)
+(add-to-list 'ac-modes 'less-css-mode)
+(add-hook 'less-css-mode-hook 'ac-css-mode-setup)
 
 ;; Zen-coding/Emmet
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emmet-mode")

@@ -16,9 +16,6 @@
 [submodule ".emacs.d/site-lisp/html5-el"]
 	path = .emacs.d/site-lisp/html5-el
 	url = https://github.com/hober/html5-el.git
-[submodule ".emacs.d/site-lisp/scss-mode"]
-	path = .emacs.d/site-lisp/scss-mode
-	url = https://github.com/antonj/scss-mode.git
 [submodule ".emacs.d/site-lisp/sparql-mode"]
 	path = .emacs.d/site-lisp/sparql-mode
 	url = https://github.com/ljos/sparql-mode.git
@@ -28,3 +25,6 @@
 [submodule ".emacs.d/site-lisp/emmet-mode"]
 	path = .emacs.d/site-lisp/emmet-mode
 	url = https://github.com/smihica/emmet-mode.git
+[submodule ".emacs.d/site-lisp/less-css-mode"]
+	path = .emacs.d/site-lisp/less-css-mode
+	url = https://github.com/purcell/less-css-mode
