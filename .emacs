@@ -22,6 +22,9 @@
 ;; Line numbers
 (global-linum-mode 1)
 
+;; Highlight current line
+(global-hl-line-mode t)
+
 ;; Don't indent with tabs ffs!
 (setq-default indent-tabs-mode nil)
 
@@ -92,34 +95,27 @@
 ;; Enable latex export in org-mode
 (require 'ox-latex)
 (add-to-list 'org-latex-packages-alist '("" "minted"))
+
 (setq org-latex-listings 'minted)
+(setq org-latex-minted-options
+      '(("linenos" "true")
+        ("breaklines" "true")))
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-;; Theme
-(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-color-theme-solarized")
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
-(global-hl-line-mode t)
-
-;; Poweline, add cuteness to emacs
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-powerline")
+;; Powerline
+(add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
-(setq powerline-arrow-shape 'arrow)
 
-(set-face-attribute 'mode-line nil
-		    :background "#9ACD32"
-		    :foreground "#030303"
-		    :inverse-video nil
-		    :box nil)
-(set-face-attribute 'mode-line-inactive nil
-		    :background "#1c1c1c"
-		    :foreground "#f9f9f9"
-		    :inverse-video nil
-		    :box nil)
+;; Theme: Moe-theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el/")
+(require 'moe-theme)
+(moe-theme-set-color 'green)
+(powerline-moe-theme)
+(moe-dark)
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
