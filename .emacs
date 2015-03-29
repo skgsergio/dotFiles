@@ -163,23 +163,6 @@
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 
-;; Turtle RDF mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/ttl-mode")
-(autoload 'ttl-mode "ttl-mode" "Major mode for OWL or Turtle files" t)
-(add-hook 'ttl-mode-hook 'turn-on-font-lock)
-(setq auto-mode-alist
-      (append
-       (list
-        '("\\.n3" . ttl-mode)
-        '("\\.ttl" . ttl-mode))
-       auto-mode-alist))
-
-;; SPARQL mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/sparql-mode")
-(autoload 'sparql-mode "sparql-mode.el" "Major mode for editing SPARQL files" t)
-(add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
-(add-to-list 'auto-mode-alist '("\\.rq$" . sparql-mode))
-
 ;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)
