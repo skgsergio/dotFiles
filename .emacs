@@ -61,38 +61,28 @@
 
 (global-set-key "\M-i" 'iwb)
 
-;; Acute to html entities
-(defun acute2html ()
-  "Convert acutes to HTML entities"
-  (interactive)
-  (save-excursion
-    (dolist (c '(("á" . "&aacute;")
-                 ("é" . "&eacute;")
-                 ("í" . "&iacute;")
-                 ("ó" . "&oacute;")
-                 ("ú" . "&uacute;")
-                 ("ñ" . "&ntilde;")
-                 ("Á" . "&Aacute;")
-                 ("É" . "&Eacute;")
-                 ("Í" . "&Iacute;")
-                 ("Ó" . "&Oacute;")
-                 ("Ú" . "&Uacute;")
-                 ("Ñ" . "&Ntilde;")))
-      (goto-char (point-min))
-      (replace-string (car c) (cdr c)))
-    (message "Acute2html: Done."))
-  )
-
 ;; Some elpa repos, just in case.
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
 
-;; Enable odt exporting in org-mode
+;; Powerline
+(add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
+(require 'powerline)
+
+;; moe-theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el/")
+(require 'moe-theme)
+(moe-theme-set-color 'green)
+(powerline-moe-theme)
+(moe-dark)
+
+;; org-mode: ODT exporting
 (require 'ox-odt)
 
-;; Enable latex export in org-mode
+;; org-mode: Latex exporting
 (require 'ox-latex)
 (add-to-list 'org-latex-packages-alist '("" "minted"))
 
@@ -105,17 +95,12 @@
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-;; Powerline
-(add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
-(require 'powerline)
-
-;; Theme: Moe-theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el/")
-(require 'moe-theme)
-(moe-theme-set-color 'green)
-(powerline-moe-theme)
-(moe-dark)
+;; Markdown-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/markdown-mode")
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; Auto-Complete
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")

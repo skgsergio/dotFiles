@@ -25,3 +25,6 @@
 [submodule ".emacs.d/site-lisp/powerline"]
 	path = .emacs.d/site-lisp/powerline
 	url = https://github.com/milkypostman/powerline.git
+[submodule ".emacs.d/site-lisp/markdown-mode"]
+	path = .emacs.d/site-lisp/markdown-mode
+	url = https://github.com/defunkt/markdown-mode.git
