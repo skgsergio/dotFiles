@@ -148,6 +148,10 @@
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 
+;; PKGBUILD mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/pkgbuild-mode")
+(require 'pkgbuild-mode)
+
 ;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)

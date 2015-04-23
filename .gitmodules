@@ -28,3 +28,6 @@
 [submodule ".emacs.d/site-lisp/markdown-mode"]
 	path = .emacs.d/site-lisp/markdown-mode
 	url = https://github.com/defunkt/markdown-mode.git
+[submodule ".emacs.d/site-lisp/pkgbuild-mode"]
+	path = .emacs.d/site-lisp/pkgbuild-mode
+	url = https://github.com/juergenhoetzel/pkgbuild-mode.git
