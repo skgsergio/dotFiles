@@ -67,6 +67,12 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
 
+;; Auto-Complete
+(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+(require 'auto-complete-config)
+(ac-config-default)
+
 ;; Powerline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
@@ -101,12 +107,6 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-;; Auto-Complete
-(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
-(require 'auto-complete-config)
-(ac-config-default)
 
 ;; web-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/web-mode")
