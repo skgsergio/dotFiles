@@ -101,6 +101,11 @@
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+;; rust-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/rust-mode")
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
 ;; Markdown-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/markdown-mode")
 (require 'markdown-mode)
