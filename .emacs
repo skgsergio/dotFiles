@@ -31,15 +31,18 @@
 ;; *~ files are useless, I always work over VCS
 (setq make-backup-files nil)
 
-;; Meta+e : "See" tabs
-(setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
-(global-set-key "\M-e" 'whitespace-mode)
+;; Mark tabs and 80th column overflow
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(setq whitespace-line-column 80)
+(global-whitespace-mode t)
+
+;; Cut lines at 80th column
+(setq-default fill-column 80)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
-
-;; Ctrl+c f : Toggle flymake
-(global-set-key "\C-cf" 'flymake-mode)
 
 ;; Remove trailing withespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -48,6 +51,17 @@
 (add-hook 'org-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
+
+(defun spell-switch-dictionary()
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+         (change (if (string= dic "english") "spanish" "english")))
+    (ispell-change-dictionary change)
+    (flyspell-buffer)
+    (message "Dictionary switched from %s to %s" dic change)
+    ))
+
+(global-set-key "\C-cf" 'spell-switch-dictionary)
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
@@ -98,8 +112,8 @@
         ("breaklines" "true")))
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;; rust-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/rust-mode")
@@ -112,6 +126,7 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; web-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/web-mode")
