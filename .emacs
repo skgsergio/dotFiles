@@ -90,6 +90,7 @@
 ;; Powerline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
+(setq powerline-default-separator 'zigzag)
 
 ;; moe-theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el/")
