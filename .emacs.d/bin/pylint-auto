@@ -20,8 +20,8 @@
 
 ## Config
 
-DEFAULT_PYTHON="python2"
-#DEFAULT_PYTHON="python3"
+#DEFAULT_PYTHON="python2"
+DEFAULT_PYTHON="python3"
 
 PYLINT_PY2="flake8-python2"
 PYLINT_PY3="flake8"
