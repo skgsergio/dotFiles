@@ -116,6 +116,10 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+;; org-mode: RevealJS
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-reveal")
+(require 'ox-reveal)
+
 ;; rust-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/rust-mode")
 (autoload 'rust-mode "rust-mode" nil t)

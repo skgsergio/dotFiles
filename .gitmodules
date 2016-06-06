@@ -31,3 +31,6 @@
 [submodule ".emacs.d/site-lisp/rust-mode"]
 	path = .emacs.d/site-lisp/rust-mode
 	url = https://github.com/rust-lang/rust-mode
+[submodule ".emacs.d/site-lisp/org-reveal"]
+	path = .emacs.d/site-lisp/org-reveal
+	url = https://github.com/yjwen/org-reveal.git
