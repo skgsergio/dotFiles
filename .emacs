@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 ;; OS X options (not using OS X anymore but...)
 (defun set-osx-keys()
@@ -77,6 +77,7 @@
 
 ;; Some elpa repos, just in case.
 (require 'package)
+
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
@@ -85,17 +86,21 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
 (require 'auto-complete-config)
+
 (ac-config-default)
 
 ;; Powerline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
+
 (setq powerline-default-separator 'zigzag)
 
 ;; moe-theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el")
+
 (require 'moe-theme)
+
 (moe-theme-set-color 'green)
 (powerline-moe-theme)
 (moe-dark)
@@ -122,15 +127,18 @@
 
 ;; rust-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/rust-mode")
-(autoload 'rust-mode "rust-mode" nil t)
+(require 'rust-mode)
+
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;; Markdown-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/markdown-mode")
 (require 'markdown-mode)
+
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; web-mode
@@ -157,48 +165,34 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
 (eval-after-load "rng-loc"
   '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
-
 (require 'whattf-dt)
 
 ;; less-css-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/less-css-mode")
 (require 'less-css-mode)
+
 (setq less-css-lessc-command (expand-file-name "~/node_modules/.bin/lessc"))
 (setq less-css-compile-at-save t)
+
 (add-to-list 'ac-modes 'less-css-mode)
 (add-hook 'less-css-mode-hook 'ac-css-mode-setup)
 
 ;; Zen-coding/Emmet
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emmet-mode")
 (require 'emmet-mode)
+
 (add-hook 'web-mode-hook 'emmet-mode)
+
+;; Flycheck
+(add-to-list 'load-path "~/.emacs.d/site-lisp/seq-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/dash-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/flycheck")
+(require 'flycheck)
+
+(global-flycheck-mode)
 
 ;; VIM-Modeline, lets respect the vim users special stuff
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)
+
 (add-to-list 'find-file-hook 'vim-modeline/do)
-
-;; Enable Flymake, Pyflakes, Chktex
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "~/.emacs.d/bin/pylint-auto" (list local-file))))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)
-               )
-
-  (defun flymake-get-tex-args (file-name)
-    (list "chktex" (list "-g0" "-r" "-l" (expand-file-name "~/.chktexrc") "-I" "-q" "-v0" file-name)))
-
-  (push
-   '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
-     1 2 3 4) flymake-err-line-patterns)
-
-  )
-
-(add-hook 'find-file-hook 'flymake-find-file-hook)
