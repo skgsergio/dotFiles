@@ -40,6 +40,3 @@
 [submodule ".emacs.d/site-lisp/.emacs.d/site-lisp/dash-el"]
 	path = .emacs.d/site-lisp/dash-el
 	url = https://github.com/magnars/dash.el.git
-[submodule ".emacs.d/site-lisp/seq-el"]
-	path = .emacs.d/site-lisp/seq-el
-	url = https://github.com/NicolasPetton/seq.el.git

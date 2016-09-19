@@ -110,16 +110,16 @@
 
 ;; org-mode: Latex exporting
 (require 'ox-latex)
+
 (add-to-list 'org-latex-packages-alist '("" "minted"))
 
 (setq org-latex-listings 'minted)
 (setq org-latex-minted-options
       '(("linenos" "true")
         ("breaklines" "true")))
+
 (setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+      '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f"))
 
 ;; org-mode: RevealJS
 (add-to-list 'load-path "~/.emacs.d/site-lisp/org-reveal")
@@ -184,7 +184,6 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; Flycheck
-(add-to-list 'load-path "~/.emacs.d/site-lisp/seq-el")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/dash-el")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/flycheck")
 (require 'flycheck)
