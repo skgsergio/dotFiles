@@ -40,3 +40,12 @@
 [submodule ".emacs.d/site-lisp/.emacs.d/site-lisp/dash-el"]
 	path = .emacs.d/site-lisp/dash-el
 	url = https://github.com/magnars/dash.el.git
+[submodule ".emacs.d/site-lisp/emacs-emojify"]
+	path = .emacs.d/site-lisp/emacs-emojify
+	url = https://github.com/iqbalansari/emacs-emojify.git
+[submodule ".emacs.d/site-lisp/ht.el"]
+	path = .emacs.d/site-lisp/ht.el
+	url = https://github.com/Wilfred/ht.el
+[submodule ".emacs.d/site-lisp/dash.el"]
+	path = .emacs.d/site-lisp/dash.el
+	url = https://github.com/magnars/dash.el
