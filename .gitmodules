@@ -20,7 +20,7 @@
 	path = .emacs.d/site-lisp/less-css-mode
 	url = https://github.com/purcell/less-css-mode
 [submodule ".emacs.d/site-lisp/moe-theme-el"]
-	path = .emacs.d/site-lisp/moe-theme-el
+	path = .emacs.d/site-lisp/moe-theme.el
 	url = https://github.com/kuanyui/moe-theme.el
 [submodule ".emacs.d/site-lisp/powerline"]
 	path = .emacs.d/site-lisp/powerline
@@ -37,9 +37,6 @@
 [submodule ".emacs.d/site-lisp/flycheck"]
 	path = .emacs.d/site-lisp/flycheck
 	url = https://github.com/flycheck/flycheck.git
-[submodule ".emacs.d/site-lisp/.emacs.d/site-lisp/dash-el"]
-	path = .emacs.d/site-lisp/dash-el
-	url = https://github.com/magnars/dash.el.git
 [submodule ".emacs.d/site-lisp/emacs-emojify"]
 	path = .emacs.d/site-lisp/emacs-emojify
 	url = https://github.com/iqbalansari/emacs-emojify.git
