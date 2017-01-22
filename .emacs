@@ -93,6 +93,7 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
 
+(setq powerline-gui-use-vcs-glyph t)
 (setq powerline-default-separator 'zigzag)
 
 ;; moe-theme
@@ -112,6 +113,8 @@
 (require 'ox-latex)
 
 (add-to-list 'org-latex-packages-alist '("" "minted"))
+
+(setq org-latex-caption-above nil)
 
 (setq org-latex-listings 'minted)
 (setq org-latex-minted-options
