@@ -1,4 +1,12 @@
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
+;; Add all subdirectories into the load-path
+(let ((base "~/.emacs.d/site-lisp"))
+  (add-to-list 'load-path base)
+  (dolist (f (directory-files base))
+    (let ((name (concat base "/" f)))
+      (when (and (file-directory-p name)
+                 (not (equal f ".."))
+                 (not (equal f ".")))
+        (add-to-list 'load-path name)))))
 
 ;; OS X options (not using OS X anymore but...)
 (defun set-osx-keys()
@@ -65,7 +73,7 @@
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
-  "Indent whole buffer"
+  "Indent whole buffer."
   (interactive)
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
@@ -83,15 +91,12 @@
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
 
 ;; Powerline
-(add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
 
 (setq powerline-gui-use-vcs-glyph t)
 (setq powerline-default-separator 'zigzag)
 
 ;; moe-theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el")
 (require 'moe-theme)
 
 (moe-theme-set-color 'green)
@@ -99,15 +104,11 @@
 (moe-dark)
 
 ;; Emojify
-(add-to-list 'load-path "~/.emacs.d/site-lisp/dash.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/ht.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-emojify")
 (require 'emojify)
+
 (add-hook 'after-init-hook 'global-emojify-mode)
 
 ;; Auto-Complete
-(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
 (require 'auto-complete-config)
 
 (ac-config-default)
@@ -131,17 +132,14 @@
       '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f"))
 
 ;; org-mode: RevealJS
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-reveal")
 (require 'ox-reveal)
 
 ;; rust-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/rust-mode")
 (require 'rust-mode)
 
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;; Markdown-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/markdown-mode")
 (require 'markdown-mode)
 
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
@@ -151,7 +149,6 @@
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; web-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/web-mode")
 (require 'web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -171,13 +168,11 @@
 (setq web-mode-code-indent-offset 2)
 
 ;; html5-el
-(add-to-list 'load-path "~/.emacs.d/site-lisp/html5-el")
 (eval-after-load "rng-loc"
   '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
 (require 'whattf-dt)
 
 ;; less-css-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/less-css-mode")
 (require 'less-css-mode)
 
 (setq less-css-lessc-command (expand-file-name "~/node_modules/.bin/lessc"))
@@ -187,20 +182,16 @@
 (add-hook 'less-css-mode-hook 'ac-css-mode-setup)
 
 ;; Zen-coding/Emmet
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emmet-mode")
 (require 'emmet-mode)
 
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; Flycheck
-(add-to-list 'load-path "~/.emacs.d/site-lisp/dash-el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/flycheck")
 (require 'flycheck)
 
 (global-flycheck-mode)
 
 ;; VIM-Modeline, lets respect the vim users special stuff
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-modeline")
 (require 'vim-modeline)
 
 (add-to-list 'find-file-hook 'vim-modeline/do)
