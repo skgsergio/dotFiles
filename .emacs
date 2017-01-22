@@ -106,6 +106,7 @@
 ;; Emojify
 (require 'emojify)
 
+(setq emojify-emoji-styles '(unicode))
 (add-hook 'after-init-hook 'global-emojify-mode)
 
 ;; Auto-Complete
