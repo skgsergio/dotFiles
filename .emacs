@@ -82,13 +82,6 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
 
-;; Auto-Complete
-(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
-(require 'auto-complete-config)
-
-(ac-config-default)
-
 ;; Powerline
 (add-to-list 'load-path "~/.emacs.d/site-lisp/powerline")
 (require 'powerline)
@@ -99,12 +92,25 @@
 ;; moe-theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/moe-theme-el")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/moe-theme-el")
-
 (require 'moe-theme)
 
 (moe-theme-set-color 'green)
 (powerline-moe-theme)
 (moe-dark)
+
+;; Emojify
+(add-to-list 'load-path "~/.emacs.d/site-lisp/dash.el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/ht.el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-emojify")
+(require 'emojify)
+(add-hook 'after-init-hook 'global-emojify-mode)
+
+;; Auto-Complete
+(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+(require 'auto-complete-config)
+
+(ac-config-default)
 
 ;; org-mode: ODT exporting
 (require 'ox-odt)
