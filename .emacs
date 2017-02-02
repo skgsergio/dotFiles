@@ -109,6 +109,11 @@
 (setq emojify-emoji-styles '(unicode))
 (add-hook 'after-init-hook 'global-emojify-mode)
 
+;; Git-gutter
+(require 'git-gutter-fringe)
+(global-git-gutter-mode)
+(setq git-gutter-fr:side 'right-fringe)
+
 ;; Auto-Complete
 (require 'auto-complete-config)
 

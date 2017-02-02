@@ -46,3 +46,15 @@
 [submodule ".emacs.d/site-lisp/dash.el"]
 	path = .emacs.d/site-lisp/dash.el
 	url = https://github.com/magnars/dash.el
+[submodule ".emacs.d/site-lisp/fringe-helper.el"]
+	path = .emacs.d/site-lisp/fringe-helper.el
+	url = https://github.com/nschum/fringe-helper.el
+[submodule ".emacs.d/site-lisp/emacs-git-gutter"]
+	path = .emacs.d/site-lisp/emacs-git-gutter
+	url = https://github.com/syohex/emacs-git-gutter
+[submodule ".emacs.d/site-lisp/emacs-git-gutter-fringe"]
+	path = .emacs.d/site-lisp/emacs-git-gutter-fringe
+	url = https://github.com/syohex/emacs-git-gutter-fringe
+[submodule ".emacs.d/site-lisp/fuzzy-el"]
+	path = .emacs.d/site-lisp/fuzzy-el
+	url = https://github.com/auto-complete/fuzzy-el
