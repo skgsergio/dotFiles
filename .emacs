@@ -173,11 +173,6 @@
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
 
-;; html5-el
-(eval-after-load "rng-loc"
-  '(add-to-list 'rng-schema-locating-files "~/.emacs.d/site-lisp/html5-el/schemas.xml"))
-(require 'whattf-dt)
-
 ;; less-css-mode
 (require 'less-css-mode)
 
