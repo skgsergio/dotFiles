@@ -23,7 +23,8 @@
 (setq inhibit-startup-screen t)
 
 ;; DIE TOOL BAR!!
-(tool-bar-mode -1)
+(when (display-graphic-p)
+  (tool-bar-mode -1))
 
 ;; KILL ALL THE BELLS!!!!!11
 (setq visible-bell t)
