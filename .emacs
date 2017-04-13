@@ -8,15 +8,16 @@
                  (not (equal f ".")))
         (add-to-list 'load-path name)))))
 
-;; OS X options (not using OS X anymore but...)
-(defun set-osx-keys()
+;; macOS config
+(if (eq system-type "darwin")
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
   (setq mac-option-key-is-meta nil)
   (setq mac-option-modifier 'none)
-  (setq x-select-enable-clipboard t))
-
-(if (eq system-type 'darwin) (set-osx-keys))
+  (setq x-select-enable-clipboard t)
+  (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+  (add-to-list 'exec-path "/usr/local/bin")
+  (message "Loaded macOS config."))
 
 ;; No startup screen
 (setq inhibit-startup-screen t)
@@ -39,12 +40,11 @@
 ;; *~ files are useless, I always work over VCS
 (setq make-backup-files nil)
 
-;; Mark tabs and 80th column overflow
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 80)
+;; Mark ugly stuff
+(setq whitespace-style '(face empty tabs trailing))
 (global-whitespace-mode t)
 
-;; Cut lines at 80th column
+;; Cut lines at 80th column in text modes
 (setq-default fill-column 80)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -53,13 +53,16 @@
 (global-set-key "\C-l" 'goto-line)
 
 ;; Remove trailing withespaces on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(unless (file-exists-p "~/.emacs.d/carto") ;; Disable for carto environ
+  (add-hook 'before-save-hook 'delete-trailing-whitespace))
 
 ;; Flyspell for LaTeX and Org mode
 (add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
+(setq ispell-dictionary "english")
 (defun spell-switch-dictionary()
   (interactive)
   (let* ((dic ispell-current-dictionary)
@@ -93,8 +96,7 @@
 ;; Powerline
 (require 'powerline)
 
-(setq powerline-gui-use-vcs-glyph t)
-(setq powerline-default-separator 'zigzag)
+(setq powerline-default-separator nil)
 
 ;; moe-theme
 (require 'moe-theme)
@@ -102,6 +104,11 @@
 (moe-theme-set-color 'green)
 (powerline-moe-theme)
 (moe-dark)
+
+;; NeoTree
+(require 'neotree)
+
+(global-set-key [f8] 'neotree-toggle)
 
 ;; Emojify
 (require 'emojify)
