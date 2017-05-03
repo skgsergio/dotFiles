@@ -129,6 +129,8 @@
 
 ;; ag: The Silver Searcher
 (require 'ag)
+(setq ag-highlight-search 't)
+(setq ag-reuse-buffers 't)
 
 ;; org-mode: Latex exporting
 (require 'ox-latex)
