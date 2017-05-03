@@ -127,8 +127,8 @@
 
 (ac-config-default)
 
-;; org-mode: ODT exporting
-(require 'ox-odt)
+;; ag: The Silver Searcher
+(require 'ag)
 
 ;; org-mode: Latex exporting
 (require 'ox-latex)

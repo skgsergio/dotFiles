@@ -64,3 +64,9 @@
 [submodule ".oh-my-zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = .oh-my-zsh-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".emacs.d/site-lisp/s.el"]
+	path = .emacs.d/site-lisp/s.el
+	url = https://github.com/magnars/s.el
+[submodule ".emacs.d/site-lisp/ag.el"]
+	path = .emacs.d/site-lisp/ag.el
+	url = https://github.com/Wilfred/ag.el
