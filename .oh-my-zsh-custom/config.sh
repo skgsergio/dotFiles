@@ -8,6 +8,10 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 bindkey '^ ' autosuggest-execute
 
 # Other stuff
+if [[ -d "$HOME/bin" ]]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
 if [[ `uname -s` == "Darwin" ]]; then
     emacs_nox() {
         /Applications/Emacs.app/Contents/MacOS/Emacs -nw -- "$@"
