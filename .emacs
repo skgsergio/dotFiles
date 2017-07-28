@@ -27,7 +27,8 @@
   (tool-bar-mode -1))
 
 ;; KILL ALL THE BELLS!!!!!11
-(setq visible-bell t)
+;(setq visible-bell t)
+(setq ring-bell-function 'ignore)
 
 ;; Line numbers
 (global-linum-mode 1)
