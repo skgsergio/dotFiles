@@ -65,7 +65,6 @@
 
 ;; Flyspell for LaTeX and Org mode
 (add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
@@ -169,6 +168,11 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+
+;; YAML mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
 ;; web-mode
 (require 'web-mode)
