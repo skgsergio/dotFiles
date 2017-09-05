@@ -12,14 +12,4 @@ if [[ -d "$HOME/bin" ]]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-if [[ `uname -s` == "Darwin" ]]; then
-    emacs_nox() {
-        /Applications/Emacs.app/Contents/MacOS/Emacs -nw -- "$@"
-    }
-else
-    emacs_nox() {
-        emacs -nw -- "$@"
-    }
-fi
-
-EDITOR=emacs_nox
+EDITOR="emacs -nw"
