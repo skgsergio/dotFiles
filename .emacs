@@ -55,8 +55,13 @@
 (global-set-key "\C-l" 'goto-line)
 
 ;; Remove trailing withespaces on save
+(defun trailing-save-hook()
+  (interactive)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (message "Enabled delete-trailing-whitespace before-save-hook."))
+
 (unless (file-exists-p "~/.emacs.d/carto") ;; Disable for carto environ
-  (add-hook 'before-save-hook 'delete-trailing-whitespace))
+  (trailing-save-hook))
 
 ;; Flyspell for LaTeX and Org mode
 (add-hook 'org-mode-hook 'flyspell-mode)
