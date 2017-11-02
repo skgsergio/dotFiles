@@ -73,3 +73,6 @@
 [submodule ".emacs.d/site-lisp/yaml-mode"]
 	path = .emacs.d/site-lisp/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode
+[submodule ".emacs.d/site-lisp/go-mode.el"]
+	path = .emacs.d/site-lisp/go-mode.el
+	url = https://github.com/dominikh/go-mode.el

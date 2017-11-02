@@ -160,6 +160,11 @@
 
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
+;; Go
+(require 'go-mode)
+
+(add-hook 'before-save-hook 'gofmt-before-save)
+
 ;; Markdown-mode
 (require 'markdown-mode)
 
