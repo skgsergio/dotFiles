@@ -137,6 +137,9 @@
 (setq ag-highlight-search 't)
 (setq ag-reuse-buffers 't)
 
+;; org-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
+
 ;; org-mode: Latex exporting
 (require 'ox-latex)
 
@@ -154,6 +157,12 @@
 
 ;; org-mode: RevealJS
 (require 'ox-reveal)
+
+;; org-mode: Markdown
+(require 'ox-md)
+
+;; org-mode: reStructuredText
+(require 'ox-rst)
 
 ;; rust-mode
 (require 'rust-mode)
