@@ -81,4 +81,4 @@
 	url = https://github.com/msnoigrs/ox-rst
 [submodule ".emacs.d/site-lisp/org-mode"]
 	path = .emacs.d/site-lisp/org-mode
-	url = git://orgmode.org/org-mode.git
+	url = https://code.orgmode.org/bzg/org-mode.git
