@@ -82,3 +82,9 @@
 [submodule ".emacs.d/site-lisp/org-mode"]
 	path = .emacs.d/site-lisp/org-mode
 	url = https://code.orgmode.org/bzg/org-mode.git
+[submodule ".emacs.d/site-lisp/emacs-terraform-mode"]
+	path = .emacs.d/site-lisp/emacs-terraform-mode
+	url = https://github.com/syohex/emacs-terraform-mode.git
+[submodule ".emacs.d/site-lisp/emacs-hcl-mode"]
+	path = .emacs.d/site-lisp/emacs-hcl-mode
+	url = https://github.com/syohex/emacs-hcl-mode.git

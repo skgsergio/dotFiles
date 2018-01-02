@@ -188,6 +188,9 @@
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
+;; terraform-mode
+(require 'terraform-mode)
+
 ;; web-mode
 (require 'web-mode)
 
