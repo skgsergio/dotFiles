@@ -191,6 +191,8 @@
 ;; terraform-mode
 (require 'terraform-mode)
 
+(add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
+
 ;; web-mode
 (require 'web-mode)
 
