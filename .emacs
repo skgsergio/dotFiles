@@ -94,10 +94,7 @@
 
 ;; Some elpa repos, just in case.
 (require 'package)
-
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives '("tromeyelpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; Powerline
 (require 'powerline)
@@ -131,6 +128,10 @@
 (require 'auto-complete-config)
 
 (ac-config-default)
+
+;; EditorConfig
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 ;; ag: The Silver Searcher
 (require 'ag)

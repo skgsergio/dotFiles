@@ -88,3 +88,6 @@
 [submodule ".emacs.d/site-lisp/emacs-hcl-mode"]
 	path = .emacs.d/site-lisp/emacs-hcl-mode
 	url = https://github.com/syohex/emacs-hcl-mode.git
+[submodule ".emacs.d/site-lisp/editorconfig-emacs"]
+	path = .emacs.d/site-lisp/editorconfig-emacs
+	url = https://github.com/editorconfig/editorconfig-emacs
