@@ -219,15 +219,6 @@
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
 
-;; less-css-mode
-(require 'less-css-mode)
-
-(setq less-css-lessc-command (expand-file-name "~/node_modules/.bin/lessc"))
-(setq less-css-compile-at-save t)
-
-(add-to-list 'ac-modes 'less-css-mode)
-(add-hook 'less-css-mode-hook 'ac-css-mode-setup)
-
 ;; Zen-coding/Emmet
 (require 'emmet-mode)
 
