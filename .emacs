@@ -1,3 +1,17 @@
+;;; .emacs -- My Emacs config
+;;
+;; Author: Sergio Conde <skgsergio(at)gmail(dot)com>
+;; URL: https://github.com/skgsergio/dotFiles
+;;
+;;; Commentary:
+;;
+;; This is my Emacs config that I've been using and creating over the years.
+;; I'm not using the package manager because I've been using git submodules
+;; for a while when it made part of Emacs, also I like it more that way.
+;;
+;;; Code:
+;;
+
 ;; Add all subdirectories into the load-path
 (let ((base "~/.emacs.d/site-lisp"))
   (add-to-list 'load-path base)
@@ -9,7 +23,7 @@
         (add-to-list 'load-path name)))))
 
 ;; macOS config
-(if (eq system-type "darwin")
+(when (string-equal system-type "darwin")
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
   (setq mac-option-key-is-meta nil)
@@ -19,6 +33,9 @@
   (add-to-list 'exec-path "/usr/local/bin")
   (message "Loaded macOS config."))
 
+;; Style selector
+(defconst custom-style "doom") ; "doom", "moe", 'nil
+
 ;; No startup screen
 (setq inhibit-startup-screen t)
 
@@ -27,7 +44,6 @@
   (tool-bar-mode -1))
 
 ;; KILL ALL THE BELLS!!!!!11
-;(setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
 ;; Line numbers
@@ -43,6 +59,7 @@
 (setq make-backup-files nil)
 
 ;; Mark ugly stuff
+(require 'whitespace)
 (setq whitespace-style '(face empty tabs trailing))
 (global-whitespace-mode t)
 
@@ -55,19 +72,20 @@
 (global-set-key "\C-l" 'goto-line)
 
 ;; Remove trailing withespaces on save
-(defun trailing-save-hook()
+(defun enable-delete-trailing-save-hook()
   (interactive)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (message "Enabled delete-trailing-whitespace before-save-hook."))
 
-(unless (file-exists-p "~/.emacs.d/carto") ;; Disable for carto environ
-  (trailing-save-hook))
+(unless (file-exists-p "~/.emacs.d/carto")
+  (enable-delete-trailing-save-hook))
 
 ;; Flyspell for LaTeX and Org mode
 (add-hook 'org-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
+(require 'ispell)
 (setq ispell-dictionary "english")
 (defun spell-switch-dictionary()
   (interactive)
@@ -96,17 +114,39 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; Powerline
-(require 'powerline)
+(when (string-equal custom-style "doom")
+  ;; Spaceline
+  (require 'spaceline-all-the-icons)
 
-(setq powerline-default-separator nil)
+  (setq spaceline-all-the-icons-separator-type 'none)
+  (spaceline-all-the-icons-theme)
 
-;; moe-theme
-(require 'moe-theme)
+  (if (eq system-type "darwin") (setq powerline-image-apple-rgb t))
 
-(moe-theme-set-color 'green)
-(powerline-moe-theme)
-(moe-dark)
+  ;; Doom
+  (require 'doom-themes)
+
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+
+  (load-theme 'doom-tomorrow-night t)
+
+  (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config))
+
+(when (string-equal custom-style "moe")
+  ;; Powerline
+  (require 'powerline)
+
+  (setq powerline-default-separator nil)
+
+  ;; moe-theme
+  (require 'moe-theme)
+
+  (moe-theme-set-color 'green)
+  (powerline-moe-theme)
+  (moe-dark))
 
 ;; NeoTree
 (require 'neotree)
@@ -122,7 +162,7 @@
 ;; Git-gutter
 (require 'git-gutter-fringe)
 (global-git-gutter-mode)
-(setq git-gutter-fr:side 'right-fringe)
+(setq git-gutter-fr:side 'left-fringe)
 
 ;; Auto-Complete
 (require 'auto-complete-config)
@@ -232,7 +272,4 @@
 
 (global-flycheck-mode)
 
-;; VIM-Modeline, lets respect the vim users special stuff
-(require 'vim-modeline)
-
-(add-to-list 'find-file-hook 'vim-modeline/do)
+;;; .emacs ends here
