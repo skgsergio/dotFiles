@@ -114,54 +114,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; Style
-(when (string-equal custom-style "doom")
-  ;; Spaceline
-  (require 'spaceline-all-the-icons)
-
-  (setq spaceline-all-the-icons-separator-type 'none)
-  (spaceline-all-the-icons-theme)
-
-  (spaceline-all-the-icons--setup-git-ahead)
-  (spaceline-all-the-icons--setup-neotree)
-
-  (spaceline-toggle-all-the-icons-projectile-off)
-  (spaceline-toggle-all-the-icons-buffer-path-off)
-  (spaceline-toggle-all-the-icons-hud-off)
-  (spaceline-toggle-all-the-icons-time-off)
-  (spaceline-toggle-all-the-icons-buffer-position-on)
-
-  (when (string-equal system-type "darwin")
-    (setq powerline-image-apple-rgb t))
-
-  ;; Doom
-  (require 'doom-themes)
-
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-
-  (load-theme 'doom-tomorrow-night t)
-
-  (doom-themes-visual-bell-config)
-  (doom-themes-neotree-config)
-  (doom-themes-org-config))
-
-(when (string-equal custom-style "moe")
-  ;; Powerline
-  (require 'powerline)
-
-  (setq powerline-default-separator nil)
-
-  (when (string-equal system-type "darwin")
-    (setq powerline-image-apple-rgb t))
-
-  ;; moe-theme
-  (require 'moe-theme)
-
-  (moe-theme-set-color 'green)
-  (powerline-moe-theme)
-  (moe-dark))
-
 ;; NeoTree
 (require 'neotree)
 
@@ -285,5 +237,53 @@
 (require 'flycheck)
 
 (global-flycheck-mode)
+
+;; Style
+(when (string-equal custom-style "doom")
+  ;; Spaceline
+  (require 'spaceline-all-the-icons)
+
+  (setq spaceline-all-the-icons-separator-type 'none)
+  (spaceline-all-the-icons-theme)
+
+  (spaceline-all-the-icons--setup-git-ahead)
+  (spaceline-all-the-icons--setup-neotree)
+
+  (spaceline-toggle-all-the-icons-projectile-off)
+  (spaceline-toggle-all-the-icons-buffer-path-off)
+  (spaceline-toggle-all-the-icons-hud-off)
+  (spaceline-toggle-all-the-icons-time-off)
+  (spaceline-toggle-all-the-icons-buffer-position-on)
+
+  (when (string-equal system-type "darwin")
+    (setq powerline-image-apple-rgb t))
+
+  ;; Doom
+  (require 'doom-themes)
+
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+
+  (load-theme 'doom-tomorrow-night t)
+
+  (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config))
+
+(when (string-equal custom-style "moe")
+  ;; Powerline
+  (require 'powerline)
+
+  (setq powerline-default-separator nil)
+
+  (when (string-equal system-type "darwin")
+    (setq powerline-image-apple-rgb t))
+
+  ;; moe-theme
+  (require 'moe-theme)
+
+  (moe-theme-set-color 'green)
+  (powerline-moe-theme)
+  (moe-dark))
 
 ;;; .emacs ends here
