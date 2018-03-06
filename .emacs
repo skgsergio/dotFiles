@@ -114,6 +114,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+;; Style
 (when (string-equal custom-style "doom")
   ;; Spaceline
   (require 'spaceline-all-the-icons)
@@ -121,7 +122,17 @@
   (setq spaceline-all-the-icons-separator-type 'none)
   (spaceline-all-the-icons-theme)
 
-  (if (eq system-type "darwin") (setq powerline-image-apple-rgb t))
+  (spaceline-all-the-icons--setup-git-ahead)
+  (spaceline-all-the-icons--setup-neotree)
+
+  (spaceline-toggle-all-the-icons-projectile-off)
+  (spaceline-toggle-all-the-icons-buffer-path-off)
+  (spaceline-toggle-all-the-icons-hud-off)
+  (spaceline-toggle-all-the-icons-time-off)
+  (spaceline-toggle-all-the-icons-buffer-position-on)
+
+  (when (string-equal system-type "darwin")
+    (setq powerline-image-apple-rgb t))
 
   ;; Doom
   (require 'doom-themes)
@@ -140,6 +151,9 @@
   (require 'powerline)
 
   (setq powerline-default-separator nil)
+
+  (when (string-equal system-type "darwin")
+    (setq powerline-image-apple-rgb t))
 
   ;; moe-theme
   (require 'moe-theme)
