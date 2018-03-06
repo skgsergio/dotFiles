@@ -55,7 +55,7 @@
 ;; Don't indent with tabs ffs!
 (setq-default indent-tabs-mode nil)
 
-;; *~ files are useless, I always work over VCS
+;; Don't create backup files (*~)
 (setq make-backup-files nil)
 
 ;; Mark ugly stuff
@@ -81,11 +81,8 @@
   (enable-delete-trailing-save-hook))
 
 ;; Flyspell for LaTeX and Org mode
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'flyspell-mode-hook 'flyspell-buffer)
-
 (require 'ispell)
+
 (setq ispell-dictionary "english")
 (defun spell-switch-dictionary()
   (interactive)
@@ -97,6 +94,10 @@
     ))
 
 (global-set-key "\C-cf" 'spell-switch-dictionary)
+
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
 ;; Indent Fucking Whole Buffer
 (defun iwb ()
@@ -112,6 +113,7 @@
 
 ;; Some elpa repos, just in case.
 (require 'package)
+
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; NeoTree
@@ -127,6 +129,7 @@
 
 ;; Git-gutter
 (require 'git-gutter-fringe)
+
 (global-git-gutter-mode)
 (setq git-gutter-fr:side 'left-fringe)
 
@@ -137,10 +140,12 @@
 
 ;; EditorConfig
 (require 'editorconfig)
+
 (editorconfig-mode 1)
 
 ;; ag: The Silver Searcher
 (require 'ag)
+
 (setq ag-highlight-search 't)
 (setq ag-reuse-buffers 't)
 
@@ -192,6 +197,7 @@
 
 ;; YAML mode
 (require 'yaml-mode)
+
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
@@ -237,7 +243,6 @@
   (setq spaceline-all-the-icons-separator-type 'none)
   (spaceline-all-the-icons-theme)
 
-  (spaceline-all-the-icons--setup-git-ahead)
   (spaceline-all-the-icons--setup-neotree)
 
   (spaceline-toggle-all-the-icons-projectile-off)
