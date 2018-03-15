@@ -37,6 +37,9 @@
 ;; Style selector
 (defconst custom-style "doom") ; "doom", "moe", 'nil
 
+;; Check if I'm in CARTO env
+(defconst carto-env (if (file-exists-p "~/.emacs.d/carto") t nil))
+
 ;; No startup screen
 (setq inhibit-startup-screen t)
 
@@ -78,7 +81,7 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (message "Enabled delete-trailing-whitespace before-save-hook."))
 
-(unless (file-exists-p "~/.emacs.d/carto")
+(unless carto-env
   (enable-delete-trailing-save-hook))
 
 ;; Flyspell for LaTeX and Org mode
@@ -176,6 +179,9 @@
 
 ;; org-mode: reStructuredText
 (require 'ox-rst)
+
+(when carto-env
+  (setq org-rst-headline-underline-characters '(?= ?- ?~ ?. ?^ ?: ?' ?\ ?_)))
 
 ;; rust-mode
 (require 'rust-mode)
