@@ -136,12 +136,13 @@
   (let ((nttp-file-name (buffer-file-name)))
     (if (neo-global--window-exists-p)
         (neotree-hide)
-      (if (and (fboundp 'projectile-project-p)
-               (projectile-project-p)
-               (fboundp 'projectile-project-root))
-          (neo-global--open-dir (projectile-project-root))
-        (neo-global--open-dir (file-name-directory nttp-file-name)))
-      (neotree-find nttp-file-name))))
+      (when (and (fboundp 'projectile-project-p)
+                 (projectile-project-p)
+                 (fboundp 'projectile-project-root))
+        (neo-global--open-dir (projectile-project-root)))
+      (if nttp-file-name
+          (neotree-find nttp-file-name)
+        (neotree-show)))))
 
 (global-set-key [f8] 'neotree-toggle-with-projectile)
 
