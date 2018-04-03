@@ -52,6 +52,7 @@
 [submodule ".emacs.d/site-lisp/emacs-neotree"]
 	path = .emacs.d/site-lisp/emacs-neotree
 	url = https://github.com/jaypei/emacs-neotree.git
+	branch = dev
 [submodule ".oh-my-zsh-custom/plugins/zsh-autosuggestions"]
 	path = .oh-my-zsh-custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
@@ -100,3 +101,6 @@
 [submodule ".emacs.d/site-lisp/spaceline-all-the-icons.el"]
 	path = .emacs.d/site-lisp/spaceline-all-the-icons.el
 	url = https://github.com/domtronn/spaceline-all-the-icons.el.git
+[submodule ".emacs.d/site-lisp/projectile"]
+	path = .emacs.d/site-lisp/projectile
+	url = https://github.com/bbatsov/projectile.git

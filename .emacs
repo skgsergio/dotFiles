@@ -43,9 +43,10 @@
 ;; No startup screen
 (setq inhibit-startup-screen t)
 
-;; DIE TOOL BAR!!
+;; DIE {TOOL,SCROLL} BAR!!
 (when (display-graphic-p)
-  (tool-bar-mode -1))
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
 ;; KILL ALL THE BELLS!!!!!11
 (setq ring-bell-function 'ignore)
@@ -120,10 +121,29 @@
 
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+;; Projectile
+(require 'projectile)
+
 ;; NeoTree
 (require 'neotree)
 
-(global-set-key [f8] 'neotree-toggle)
+(setq neo-force-change-root t)
+(setq neo-autorefresh t)
+
+(defun neotree-toggle-with-projectile ()
+  "Toggle neotree using projectile."
+  (interactive)
+  (let ((nttp-file-name (buffer-file-name)))
+    (if (neo-global--window-exists-p)
+        (neotree-hide)
+      (if (and (fboundp 'projectile-project-p)
+               (projectile-project-p)
+               (fboundp 'projectile-project-root))
+          (neo-global--open-dir (projectile-project-root))
+        (neo-global--open-dir (file-name-directory nttp-file-name)))
+      (neotree-find nttp-file-name))))
+
+(global-set-key [f8] 'neotree-toggle-with-projectile)
 
 ;; Emojify
 (require 'emojify)
