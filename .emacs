@@ -121,6 +121,11 @@
 
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+;; golden-ratio
+(require 'golden-ratio)
+
+(golden-ratio-mode 1)
+
 ;; Projectile
 (require 'projectile)
 

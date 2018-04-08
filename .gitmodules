@@ -104,3 +104,6 @@
 [submodule ".emacs.d/site-lisp/projectile"]
 	path = .emacs.d/site-lisp/projectile
 	url = https://github.com/bbatsov/projectile.git
+[submodule ".emacs.d/site-lisp/golden-ratio.el"]
+	path = .emacs.d/site-lisp/golden-ratio.el
+	url = https://github.com/roman/golden-ratio.el
