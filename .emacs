@@ -209,6 +209,9 @@
 (when carto-env
   (setq org-rst-headline-underline-characters '(?= ?- ?~ ?. ?^ ?: ?' ?\ ?_)))
 
+;; htmlize for exporting code highlighted to html
+(require 'htmlize)
+
 ;; rust-mode
 (require 'rust-mode)
 

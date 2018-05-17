@@ -107,3 +107,6 @@
 [submodule ".emacs.d/site-lisp/golden-ratio.el"]
 	path = .emacs.d/site-lisp/golden-ratio.el
 	url = https://github.com/roman/golden-ratio.el
+[submodule ".emacs.d/site-lisp/emacs-htmlize"]
+	path = .emacs.d/site-lisp/emacs-htmlize
+	url = https://github.com/hniksic/emacs-htmlize.git
