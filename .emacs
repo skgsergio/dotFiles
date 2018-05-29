@@ -52,7 +52,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; Line numbers
-(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 
 ;; Highlight current line
 (global-hl-line-mode t)
@@ -162,6 +162,16 @@
 
 (global-git-gutter-mode)
 (setq git-gutter-fr:side 'left-fringe)
+
+(fringe-helper-define 'git-gutter-fr:modified nil
+  "XX......"
+  "XXX....."
+  "XXXX...."
+  "XXXXX..."
+  "XXXXX..."
+  "XXXX...."
+  "XXX....."
+  "XX......")
 
 ;; Auto-Complete
 (require 'auto-complete-config)
@@ -300,7 +310,11 @@
 
   (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
-  (doom-themes-org-config))
+  (doom-themes-org-config)
+
+  ;; doom-tomorrow-night vc-modified color is useless
+  (set-face-foreground 'git-gutter:modified "#f0c674")
+  (set-face-foreground 'git-gutter-fr:modified "#f0c674"))
 
 (when (string-equal custom-style "moe")
   ;; Powerline
