@@ -60,12 +60,15 @@
 ;; Don't indent with tabs ffs!
 (setq-default indent-tabs-mode nil)
 
+;; Display tabs as 4 characters
+(setq-default tab-width 4)
+
 ;; Don't create backup files (*~)
 (setq make-backup-files nil)
 
 ;; Mark ugly stuff
 (require 'whitespace)
-(setq whitespace-style '(face empty tabs trailing))
+(setq whitespace-style '(face empty trailing))
 (global-whitespace-mode t)
 
 ;; Cut lines at 80th column in text modes
@@ -77,13 +80,7 @@
 (global-set-key "\C-l" 'goto-line)
 
 ;; Remove trailing withespaces on save
-(defun enable-delete-trailing-save-hook()
-  (interactive)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (message "Enabled delete-trailing-whitespace before-save-hook."))
-
-(unless carto-env
-  (enable-delete-trailing-save-hook))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Flyspell for LaTeX and Org mode
 (require 'ispell)
