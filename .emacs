@@ -34,9 +34,6 @@
   (add-to-list 'exec-path "/Library/TeX/texbin")
   (message "Loaded macOS config."))
 
-;; Style selector
-(defconst custom-style "doom") ; "doom", "moe", 'nil
-
 ;; Check if I'm in CARTO env
 (defconst carto-env (if (file-exists-p "~/.emacs.d/carto") t nil))
 
@@ -68,13 +65,16 @@
 
 ;; Mark ugly stuff
 (require 'whitespace)
+
 (setq whitespace-style '(face empty trailing))
 (global-whitespace-mode t)
 
 ;; Cut lines at 80th column in text modes
 (setq-default fill-column 80)
+
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'yaml-mode-hook 'turn-off-auto-fill)
 
 ;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
@@ -101,7 +101,7 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
-;; Indent Fucking Whole Buffer
+;; Indent whole buffer
 (defun iwb ()
   "Indent whole buffer."
   (interactive)
@@ -278,55 +278,39 @@
 
 (global-flycheck-mode)
 
-;; Style
-(when (string-equal custom-style "doom")
-  ;; Spaceline
-  (require 'spaceline-all-the-icons)
+;;;; Style
 
-  (setq spaceline-all-the-icons-separator-type 'none)
-  (spaceline-all-the-icons-theme)
+;; Spaceline
+(require 'spaceline-all-the-icons)
 
-  (spaceline-all-the-icons--setup-neotree)
+(setq spaceline-all-the-icons-separator-type 'none)
+(spaceline-all-the-icons-theme)
 
-  (spaceline-toggle-all-the-icons-projectile-off)
-  (spaceline-toggle-all-the-icons-buffer-path-off)
-  (spaceline-toggle-all-the-icons-hud-off)
-  (spaceline-toggle-all-the-icons-time-off)
-  (spaceline-toggle-all-the-icons-buffer-position-on)
+(spaceline-all-the-icons--setup-neotree)
 
-  (when (string-equal system-type "darwin")
-    (setq powerline-image-apple-rgb t))
+(spaceline-toggle-all-the-icons-projectile-off)
+(spaceline-toggle-all-the-icons-buffer-path-off)
+(spaceline-toggle-all-the-icons-hud-off)
+(spaceline-toggle-all-the-icons-time-off)
+(spaceline-toggle-all-the-icons-buffer-position-on)
 
-  ;; Doom
-  (require 'doom-themes)
+(when (string-equal system-type "darwin")
+  (setq powerline-image-apple-rgb t))
 
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
+;; Doom
+(require 'doom-themes)
 
-  (load-theme 'doom-tomorrow-night t)
+(setq doom-themes-enable-bold t
+      doom-themes-enable-italic t)
 
-  (doom-themes-visual-bell-config)
-  (doom-themes-neotree-config)
-  (doom-themes-org-config)
+(load-theme 'doom-tomorrow-night t)
 
-  ;; doom-tomorrow-night vc-modified color is useless
-  (set-face-foreground 'git-gutter:modified "#f0c674")
-  (set-face-foreground 'git-gutter-fr:modified "#f0c674"))
+(doom-themes-visual-bell-config)
+(doom-themes-neotree-config)
+(doom-themes-org-config)
 
-(when (string-equal custom-style "moe")
-  ;; Powerline
-  (require 'powerline)
-
-  (setq powerline-default-separator nil)
-
-  (when (string-equal system-type "darwin")
-    (setq powerline-image-apple-rgb t))
-
-  ;; moe-theme
-  (require 'moe-theme)
-
-  (moe-theme-set-color 'green)
-  (powerline-moe-theme)
-  (moe-dark))
+;; doom-tomorrow-night vc-modified color is useless
+(set-face-foreground 'git-gutter:modified "#f0c674")
+(set-face-foreground 'git-gutter-fr:modified "#f0c674")
 
 ;;; .emacs ends here
