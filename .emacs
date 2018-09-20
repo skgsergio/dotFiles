@@ -313,4 +313,8 @@
 (set-face-foreground 'git-gutter:modified "#f0c674")
 (set-face-foreground 'git-gutter-fr:modified "#f0c674")
 
+(when (string-equal window-system "ns")
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+
 ;;; .emacs ends here
