@@ -107,3 +107,6 @@
 [submodule ".emacs.d/site-lisp/emacs-htmlize"]
 	path = .emacs.d/site-lisp/emacs-htmlize
 	url = https://github.com/hniksic/emacs-htmlize.git
+[submodule ".emacs.d/site-lisp/dockerfile-mode"]
+	path = .emacs.d/site-lisp/dockerfile-mode
+	url = https://github.com/spotify/dockerfile-mode.git

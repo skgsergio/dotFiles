@@ -249,6 +249,10 @@
 
 (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
+;; dockerfile-mode
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
 ;; web-mode
 (require 'web-mode)
 
