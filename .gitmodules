@@ -110,3 +110,9 @@
 [submodule ".emacs.d/site-lisp/dockerfile-mode"]
 	path = .emacs.d/site-lisp/dockerfile-mode
 	url = https://github.com/spotify/dockerfile-mode.git
+[submodule ".emacs.d/site-lisp/pkg-info.el"]
+	path = .emacs.d/site-lisp/pkg-info.el
+	url = https://github.com/lunaryorn/pkg-info.el
+[submodule ".emacs.d/site-lisp/epl"]
+	path = .emacs.d/site-lisp/epl
+	url = https://github.com/cask/epl.git
