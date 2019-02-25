@@ -278,6 +278,7 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; Flycheck
+(require 'pkg-info)
 (require 'flycheck)
 
 (global-flycheck-mode)
