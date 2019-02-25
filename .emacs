@@ -288,16 +288,20 @@
 ;; Spaceline
 (require 'spaceline-all-the-icons)
 
-(setq spaceline-all-the-icons-separator-type 'none)
 (spaceline-all-the-icons-theme)
 
 (spaceline-all-the-icons--setup-neotree)
 
-(spaceline-toggle-all-the-icons-projectile-off)
+(spaceline-toggle-all-the-icons-buffer-position-on)
+(spaceline-toggle-all-the-icons-projectile-on)
+
 (spaceline-toggle-all-the-icons-buffer-path-off)
 (spaceline-toggle-all-the-icons-hud-off)
 (spaceline-toggle-all-the-icons-time-off)
-(spaceline-toggle-all-the-icons-buffer-position-on)
+
+(setq spaceline-all-the-icons-separator-type 'none)
+(setq spaceline-all-the-icons-icon-set-modified 'circle)
+(setq spaceline-all-the-icons-hide-long-buffer-path t)
 
 (when (string-equal system-type "darwin")
   (setq powerline-image-apple-rgb t))
