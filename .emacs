@@ -294,8 +294,8 @@
 
 (spaceline-toggle-all-the-icons-buffer-position-on)
 (spaceline-toggle-all-the-icons-projectile-on)
+(spaceline-toggle-all-the-icons-buffer-path-on)
 
-(spaceline-toggle-all-the-icons-buffer-path-off)
 (spaceline-toggle-all-the-icons-hud-off)
 (spaceline-toggle-all-the-icons-time-off)
 
