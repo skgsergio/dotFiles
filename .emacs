@@ -308,19 +308,23 @@
 
 ;; Doom
 (require 'doom-themes)
+(require 'doom-themes-ext-neotree)
+(require 'doom-themes-ext-org)
+(require 'doom-themes-ext-visual-bell)
 
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
 
 (load-theme 'doom-tomorrow-night t)
 
-(doom-themes-visual-bell-config)
 (doom-themes-neotree-config)
 (doom-themes-org-config)
+(doom-themes-visual-bell-config)
 
-;; doom-tomorrow-night vc-modified color is useless
+;; Fix some colors
 (set-face-foreground 'git-gutter:modified "#f0c674")
 (set-face-foreground 'git-gutter-fr:modified "#f0c674")
+(set-face-attribute 'spaceline-highlight-face nil :foreground "base0" :background "orange")
 
 (when (string-equal window-system "ns")
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
