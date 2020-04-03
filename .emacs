@@ -322,9 +322,9 @@
 (doom-themes-visual-bell-config)
 
 ;; Fix some colors
-(set-face-foreground 'git-gutter:modified "#f0c674")
-(set-face-foreground 'git-gutter-fr:modified "#f0c674")
-(set-face-attribute 'spaceline-highlight-face nil :foreground "base0" :background "orange")
+(set-face-foreground 'git-gutter:modified "orange")
+(set-face-foreground 'git-gutter-fr:modified "orange")
+(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
 
 (when (string-equal window-system "ns")
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
