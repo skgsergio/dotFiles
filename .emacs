@@ -29,7 +29,7 @@
   (setq mac-option-key-is-meta nil)
   (setq mac-option-modifier 'none)
   (setq x-select-enable-clipboard t)
-  (setenv "PATH" (concat "/usr/local/bin:/Library/TeX/texbin:" (getenv "PATH")))
+  (setenv "PATH" (concat  (getenv "PATH") ":/usr/local/bin:/Library/TeX/texbin"))
   (add-to-list 'exec-path "/usr/local/bin")
   (add-to-list 'exec-path "/Library/TeX/texbin")
   (message "Loaded macOS config."))
