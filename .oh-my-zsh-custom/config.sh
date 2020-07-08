@@ -13,3 +13,7 @@ if [[ -d "$HOME/bin" ]]; then
 fi
 
 EDITOR="emacs -nw"
+
+alias difff="git diff --no-index"
+
+haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'; }
