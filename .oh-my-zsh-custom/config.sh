@@ -4,7 +4,7 @@ ZSH_THEME="gentoo-advanced"
 
 plugins=($plugins zsh-autosuggestions zsh-syntax-highlighting)
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 bindkey '^ ' autosuggest-execute
 
 # Other stuff
