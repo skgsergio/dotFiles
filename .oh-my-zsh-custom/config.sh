@@ -16,4 +16,28 @@ EDITOR="emacs -nw"
 
 alias difff="git diff --no-index"
 
-haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'; }
+haste() {
+    a=$(cat)
+    curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'
+}
+
+chkcert() {
+    if [ "$#" -eq 2 ]; then
+        chk_srv="$1"
+        chk_port="$2"
+        chk_sni=""
+    elif [ "$#" -eq 3 ]; then
+        chk_srv="$1"
+        chk_port="$2"
+        chk_sni="$3"
+    else
+        echo "Usage: $0 name_or_ip port optional_sni"
+        return 1
+    fi
+
+    if [ -z "$chk_sni" ]; then
+        openssl s_client -connect "${chk_srv}:${chk_port}"
+    else
+        openssl s_client -connect "${chk_srv}:${chk_port}" -servername "${chk_sni}"
+    fi < /dev/null | openssl x509 -noout -text
+}
