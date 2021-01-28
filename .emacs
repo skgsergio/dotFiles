@@ -34,8 +34,17 @@
   (add-to-list 'exec-path "/Library/TeX/texbin")
   (message "Loaded macOS config."))
 
-;; Check if I'm in CARTO env
-(defconst carto-env (if (file-exists-p "~/.emacs.d/carto") t nil))
+;; WSL config
+(when (and (string-equal system-type "gnu/linux")
+           (string-match "microsoft"
+                         (with-temp-buffer (shell-command "uname -r" t)
+                                           (goto-char (point-max))
+                                           (delete-char -1)
+                                           (buffer-string))))
+  (defun browse-url-windows-chrome-from-wsl (url &optional new-window)
+    (shell-command (format "cmd.exe '/C' \"start chrome %s\" 2>/dev/null" url)))
+  (setq browse-url-browser-function 'browse-url-windows-chrome-from-wsl)
+  (message "Loaded WSL config."))
 
 ;; No startup screen
 (setq inhibit-startup-screen t)
@@ -85,11 +94,11 @@
 ;; Flyspell for LaTeX and Org mode
 (require 'ispell)
 
-(setq ispell-dictionary "english")
+(setq ispell-dictionary "american")
 (defun spell-switch-dictionary()
   (interactive)
   (let* ((dic ispell-current-dictionary)
-         (change (if (string= dic "english") "spanish" "english")))
+         (change (if (string= dic "american") "castellano" "american")))
     (ispell-change-dictionary change)
     (flyspell-buffer)
     (message "Dictionary switched from %s to %s" dic change)
@@ -212,9 +221,6 @@
 
 ;; org-mode: reStructuredText
 (require 'ox-rst)
-
-(when carto-env
-  (setq org-rst-headline-underline-characters '(?= ?- ?~ ?. ?^ ?: ?' ?\ ?_)))
 
 ;; htmlize for exporting code highlighted to html
 (require 'htmlize)
