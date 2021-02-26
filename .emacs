@@ -42,7 +42,7 @@
                                            (delete-char -1)
                                            (buffer-string))))
   (defun browse-url-windows-chrome-from-wsl (url &optional new-window)
-    (shell-command (format "cmd.exe '/C' \"start chrome %s\" 2>/dev/null" url)))
+    (shell-command (format "explorer.exe \"%s\"; true" url)))
   (setq browse-url-browser-function 'browse-url-windows-chrome-from-wsl)
   (message "Loaded WSL config."))
 
