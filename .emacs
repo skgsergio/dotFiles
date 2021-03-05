@@ -164,20 +164,14 @@
 (add-hook 'after-init-hook 'global-emojify-mode)
 
 ;; Git-gutter
-(require 'git-gutter-fringe)
+(require 'git-gutter)
 
 (global-git-gutter-mode)
-(setq git-gutter-fr:side 'left-fringe)
 
-(fringe-helper-define 'git-gutter-fr:modified nil
-  "XX......"
-  "XXX....."
-  "XXXX...."
-  "XXXXX..."
-  "XXXXX..."
-  "XXXX...."
-  "XXX....."
-  "XX......")
+(custom-set-variables
+ '(git-gutter:added-sign "+")
+ '(git-gutter:modified-sign "~")
+ '(git-gutter:deleted-sign "-"))
 
 ;; Auto-Complete
 (require 'auto-complete-config)
@@ -329,7 +323,6 @@
 
 ;; Fix some colors
 (set-face-foreground 'git-gutter:modified "orange")
-(set-face-foreground 'git-gutter-fr:modified "orange")
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
 
 (when (string-equal window-system "ns")

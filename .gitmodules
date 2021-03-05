@@ -40,9 +40,6 @@
 [submodule ".emacs.d/site-lisp/emacs-git-gutter"]
 	path = .emacs.d/site-lisp/emacs-git-gutter
 	url = https://github.com/syohex/emacs-git-gutter.git
-[submodule ".emacs.d/site-lisp/emacs-git-gutter-fringe"]
-	path = .emacs.d/site-lisp/emacs-git-gutter-fringe
-	url = https://github.com/syohex/emacs-git-gutter-fringe.git
 [submodule ".emacs.d/site-lisp/fuzzy-el"]
 	path = .emacs.d/site-lisp/fuzzy-el
 	url = https://github.com/auto-complete/fuzzy-el.git
