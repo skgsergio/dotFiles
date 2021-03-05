@@ -172,6 +172,8 @@
 (global-git-gutter-mode)
 
 (custom-set-variables
+ '(git-gutter:separator-sign " ")
+ '(git-gutter:unchanged-sign " ")
  '(git-gutter:added-sign "+")
  '(git-gutter:modified-sign "~")
  '(git-gutter:deleted-sign "-"))
@@ -326,6 +328,10 @@
 
 ;; Fix some colors
 (set-face-foreground 'git-gutter:modified "orange")
+(set-face-background 'git-gutter:unchanged "grey15")
+(set-face-background 'git-gutter:added "grey15")
+(set-face-background 'git-gutter:modified "grey15")
+(set-face-background 'git-gutter:deleted "grey15")
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
 
 ;;; .emacs ends here
