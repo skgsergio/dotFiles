@@ -32,6 +32,9 @@
   (setenv "PATH" (concat  (getenv "PATH") ":/usr/local/bin:/Library/TeX/texbin"))
   (add-to-list 'exec-path "/usr/local/bin")
   (add-to-list 'exec-path "/Library/TeX/texbin")
+  (when (string-equal window-system "ns")
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark)))
   (message "Loaded macOS config."))
 
 ;; WSL config
@@ -324,9 +327,5 @@
 ;; Fix some colors
 (set-face-foreground 'git-gutter:modified "orange")
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
-
-(when (string-equal window-system "ns")
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 ;;; .emacs ends here
