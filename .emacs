@@ -335,6 +335,6 @@
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
 
 ;; Font size
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :family "Source Code Pro" :height 110)
 
 ;;; .emacs ends here
