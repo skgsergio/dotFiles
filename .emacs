@@ -334,4 +334,7 @@
 (set-face-background 'git-gutter:deleted "grey15")
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
 
+;; Font size
+(set-face-attribute 'default nil :height 110)
+
 ;;; .emacs ends here
