@@ -217,9 +217,6 @@
 ;; org-mode: Markdown
 (require 'ox-md)
 
-;; org-mode: reStructuredText
-(require 'ox-rst)
-
 ;; htmlize for exporting code highlighted to html
 (require 'htmlize)
 

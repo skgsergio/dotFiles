@@ -65,9 +65,6 @@
 [submodule ".emacs.d/site-lisp/go-mode.el"]
 	path = .emacs.d/site-lisp/go-mode.el
 	url = https://github.com/dominikh/go-mode.el
-[submodule ".emacs.d/site-lisp/ox-rst"]
-	path = .emacs.d/site-lisp/ox-rst
-	url = https://github.com/msnoigrs/ox-rst
 [submodule ".emacs.d/site-lisp/org-mode"]
 	path = .emacs.d/site-lisp/org-mode
 	url = https://code.orgmode.org/bzg/org-mode.git
