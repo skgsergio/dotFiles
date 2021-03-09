@@ -173,7 +173,6 @@
 
 (custom-set-variables
  '(git-gutter:separator-sign " ")
- '(git-gutter:unchanged-sign " ")
  '(git-gutter:added-sign "+")
  '(git-gutter:modified-sign "~")
  '(git-gutter:deleted-sign "-"))
@@ -326,15 +325,13 @@
 (doom-themes-org-config)
 (doom-themes-visual-bell-config)
 
-;; Fix some colors
+;; Customize colors
 (set-face-foreground 'git-gutter:modified "orange")
-(set-face-background 'git-gutter:unchanged "grey15")
-(set-face-background 'git-gutter:added "grey15")
-(set-face-background 'git-gutter:modified "grey15")
-(set-face-background 'git-gutter:deleted "grey15")
-(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange")
+(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "dark orange")
 
-;; Font size
-(set-face-attribute 'default nil :family "Source Code Pro" :height 110)
+;; Customize fonts
+(setq my-font "Source Code Pro")
+(set-face-attribute 'default nil :family my-font :height 110)
+(set-face-attribute 'fixed-pitch-serif nil :family my-font)
 
 ;;; .emacs ends here
