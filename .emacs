@@ -135,6 +135,8 @@
 
 (golden-ratio-mode 1)
 
+(setq golden-ratio-max-width 100)
+
 ;; Projectile
 (require 'projectile)
 
@@ -268,6 +270,7 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html.j2\\'" . web-mode))
 
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
