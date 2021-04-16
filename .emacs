@@ -135,7 +135,8 @@
 
 (golden-ratio-mode 1)
 
-(setq golden-ratio-max-width 100)
+(setq golden-ratio-auto-scale t)
+;(setq golden-ratio-max-width 100)
 
 ;; Projectile
 (require 'projectile)
