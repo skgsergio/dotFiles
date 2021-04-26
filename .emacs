@@ -266,7 +266,7 @@
 (use-package lsp-mode
   :init (progn
           (setq lsp-enable-snippet nil)
-          )
+          (setq read-process-output-max (* (* 1024 1024) 2)))
   )
 
 (use-package lsp-ui
