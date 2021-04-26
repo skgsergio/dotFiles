@@ -142,18 +142,14 @@
 
 (setq use-package-always-ensure t)
 
-;; golden-ratio
-(use-package golden-ratio
-  :init (progn
-          (golden-ratio-mode 1)
-          (setq golden-ratio-auto-scale t))
-  )
-
 ;; Projectile
 (use-package projectile)
 
 ;; Tremacs
-(use-package treemacs)
+(use-package treemacs
+  :bind (:map global-map
+              ("C-x t t" . treemacs))
+  )
 
 (use-package treemacs-projectile)
 
@@ -280,6 +276,14 @@
 
 (use-package lsp-treemacs
   :init (lsp-treemacs-sync-mode 1)
+  :bind (:map global-map
+              ("C-x t e" . lsp-treemacs-errors-list)
+              ("C-x t s" . lsp-treemacs-symbols)
+              ("C-x t r" . lsp-treemacs-references)
+              ("C-x t i" . lsp-treemacs-implementations)
+              ("C-x t c" . lsp-treemacs-call-hierarchy)
+              ("C-x t y" . lsp-treemacs-type-hierarchy)
+              ("C-x t d" . lsp-treemacs-deps-list))
   )
 
 ;; Python + LSP Python MS Server
