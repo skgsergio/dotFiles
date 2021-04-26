@@ -287,7 +287,7 @@
   )
 
 ;; Python + LSP Python MS Server
-(use-package python
+(use-package python-mode
   :init (add-hook 'python-mode-hook 'lsp)
   )
 
