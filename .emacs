@@ -6,21 +6,11 @@
 ;;; Commentary:
 ;;
 ;; This is my Emacs config that I've been using and creating over the years.
-;; I'm not using the package manager because I've been using git submodules
-;; for a while when it made part of Emacs, also I like it more that way.
 ;;
 ;;; Code:
 ;;
 
-;; Add all subdirectories into the load-path
-(let ((base "~/.emacs.d/site-lisp"))
-  (add-to-list 'load-path base)
-  (dolist (f (directory-files base))
-    (let ((name (concat base "/" f)))
-      (when (and (file-directory-p name)
-                 (not (equal f ".."))
-                 (not (equal f ".")))
-        (add-to-list 'load-path name)))))
+;;; OS Config
 
 ;; macOS config
 (when (string-equal system-type "darwin")
@@ -48,6 +38,8 @@
     (shell-command (format "explorer.exe \"%s\"; true" url)))
   (setq browse-url-browser-function 'browse-url-windows-chrome-from-wsl)
   (message "Loaded WSL config."))
+
+;;; Base config
 
 ;; No startup screen
 (setq inhibit-startup-screen t)
@@ -78,26 +70,36 @@
 ;; Always follow symlinks
 (setq find-file-visit-truename t)
 
-;; Mark ugly stuff
-(require 'whitespace)
-
-(setq whitespace-style '(face empty trailing))
-(global-whitespace-mode t)
-
-;; Cut lines at 80th column in text modes
-(setq-default fill-column 80)
-
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'yaml-mode-hook 'turn-off-auto-fill)
-
 ;; Ctrl+l : Goto Line
 (global-set-key "\C-l" 'goto-line)
 
 ;; Remove trailing withespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Flyspell for LaTeX and Org mode
+;; Cut lines at 80th column in text modes
+(setq-default fill-column 80)
+
+(add-hook 'text-mode-hook 'auto-fill-mode)
+
+;; Indent whole buffer
+(defun iwb ()
+  "Indent whole buffer."
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max))
+  (message "Indent buffer: Done.")
+  )
+
+(global-set-key "\M-i" 'iwb)
+
+;; Mark ugly stuff
+(require 'whitespace)
+
+(setq whitespace-style '(face empty trailing))
+(global-whitespace-mode t)
+
+;; Flyspell
 (require 'ispell)
 
 (setq ispell-dictionary "american")
@@ -112,222 +114,231 @@
 
 (global-set-key "\C-cf" 'spell-switch-dictionary)
 
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
-;; Indent whole buffer
-(defun iwb ()
-  "Indent whole buffer."
-  (interactive)
-  (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max))
-  (message "Indent buffer: Done.")
-  )
+;;; Configure package
 
-(global-set-key "\M-i" 'iwb)
-
-;; Some elpa repos, just in case.
 (require 'package)
 
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; use-package
+(dolist (package '(use-package))
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(require 'use-package)
+(require 'use-package-ensure)
+
+(setq use-package-always-ensure t)
 
 ;; golden-ratio
-(require 'golden-ratio)
-
-(golden-ratio-mode 1)
-
-(setq golden-ratio-auto-scale t)
-;(setq golden-ratio-max-width 100)
+(use-package golden-ratio
+  :init (progn
+          (golden-ratio-mode 1)
+          (setq golden-ratio-auto-scale t))
+  )
 
 ;; Projectile
-(require 'projectile)
+(use-package projectile)
 
 ;; NeoTree
-(require 'neotree)
+(use-package neotree
+  :init (progn
+          (setq neo-force-change-root t)
+          (setq neo-autorefresh t)
 
-(setq neo-force-change-root t)
-(setq neo-autorefresh t)
+          (defun neotree-toggle-with-projectile ()
+            "Toggle neotree using projectile."
+            (interactive)
+            (let ((nttp-file-name (buffer-file-name)))
+              (if (neo-global--window-exists-p)
+                  (neotree-hide)
+                (when (and (fboundp 'projectile-project-p)
+                           (projectile-project-p)
+                           (fboundp 'projectile-project-root))
+                  (neo-global--open-dir (projectile-project-root)))
+                (if nttp-file-name
+                    (neotree-find nttp-file-name)
+                  (neotree-show)))))
 
-(defun neotree-toggle-with-projectile ()
-  "Toggle neotree using projectile."
-  (interactive)
-  (let ((nttp-file-name (buffer-file-name)))
-    (if (neo-global--window-exists-p)
-        (neotree-hide)
-      (when (and (fboundp 'projectile-project-p)
-                 (projectile-project-p)
-                 (fboundp 'projectile-project-root))
-        (neo-global--open-dir (projectile-project-root)))
-      (if nttp-file-name
-          (neotree-find nttp-file-name)
-        (neotree-show)))))
-
-(global-set-key [f8] 'neotree-toggle-with-projectile)
+          (global-set-key [f8] 'neotree-toggle-with-projectile))
+  )
 
 ;; Emojify
-(require 'emojify)
-
-(setq emojify-emoji-styles '(unicode))
-(add-hook 'after-init-hook 'global-emojify-mode)
+(use-package emojify
+  :init (progn
+          (global-emojify-mode)
+          (setq emojify-emoji-styles '(unicode)))
+  )
 
 ;; Git-gutter
-(require 'git-gutter)
-
-(global-git-gutter-mode)
-
-(custom-set-variables
- '(git-gutter:separator-sign " ")
- '(git-gutter:added-sign "+")
- '(git-gutter:modified-sign "~")
- '(git-gutter:deleted-sign "-"))
-
-;; Company
-(require 'company)
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; EditorConfig
-(require 'editorconfig)
-
-(editorconfig-mode 1)
+(use-package git-gutter
+  :init (progn
+          (global-git-gutter-mode)
+          (setq git-gutter:added-sign "+")
+          (setq git-gutter:deleted-sign "-")
+          (setq git-gutter:modified-sign "~")
+          (setq git-gutter:separator-sign " "))
+  )
 
 ;; ag: The Silver Searcher
-(require 'ag)
-
-(setq ag-highlight-search 't)
-(setq ag-reuse-buffers 't)
+(use-package ag
+  :init (progn
+          (setq ag-highlight-search 't)
+          (setq ag-reuse-buffers 't))
+  )
 
 ;; org-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-
-;; org-mode: Latex exporting
-(require 'ox-latex)
-
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-
-(setq org-latex-caption-above nil)
-
-(setq org-latex-listings 'minted)
-(setq org-latex-minted-options
-      '(("linenos" "true")
-        ("breaklines" "true")))
-
-(setq org-latex-pdf-process
-      '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f"))
+(use-package org
+  :init (progn
+          (require 'ox-latex)
+          (add-hook 'org-mode-hook 'flyspell-mode)
+          (add-hook 'org-mode-hook 'auto-fill-mode)
+          (add-to-list 'org-latex-packages-alist '("" "minted"))
+          (setq org-latex-caption-above nil)
+          (setq org-latex-listings 'minted)
+          (setq org-latex-minted-options
+                '(("linenos" "true")
+                  ("breaklines" "true")))
+          (setq org-latex-pdf-process
+                '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f")))
+  )
 
 ;; org-mode: RevealJS
-(require 'ox-reveal)
-
-;; org-mode: Markdown
-(require 'ox-md)
+(use-package ox-reveal)
 
 ;; htmlize for exporting code highlighted to html
-(require 'htmlize)
-
-;; rust-mode
-(require 'rust-mode)
-
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-
-;; Go
-(require 'go-mode)
-
-(add-hook 'before-save-hook 'gofmt-before-save)
+(use-package htmlize)
 
 ;; Markdown-mode
-(require 'markdown-mode)
-
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+(use-package markdown-mode
+  :init (progn
+          (add-hook 'markdown-mode-hook 'flyspell-mode)
+          (add-hook 'markdown-mode-hook 'auto-fill-mode))
+  :mode (("\\.markdown$" . markdown-mode)
+         ("\\.md$" . markdown-mode))
+  )
 
 ;; YAML mode
-(require 'yaml-mode)
-
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+(use-package yaml-mode
+  :mode (("\\.yaml$" . yaml-mode)
+         ("\\.yml$" . yaml-mode))
+  )
 
 ;; terraform-mode
-(require 'terraform-mode)
-
-(add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
+(use-package terraform-mode
+  :init (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
+  )
 
 ;; dockerfile-mode
-(require 'dockerfile-mode)
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+(use-package dockerfile-mode
+  :mode ("^Dockerfile" . dockerfile-mode)
+  )
 
 ;; web-mode
-(require 'web-mode)
+(use-package web-mode
+  :mode (("\\.phtml$" . web-mode)
+         ("\\.php$" . web-mode)
+         ("\\.[agj]sp$" . web-mode)
+         ("\\.as[cp]x$" . web-mode)
+         ("\\.erb$" . web-mode)
+         ("\\.mustache$" . web-mode)
+         ("\\.djhtml$" . web-mode)
+         ("\\.css$" . web-mode)
+         ("\\.html$" . web-mode)
+         ("\\.js$" . web-mode)
+         ("\\.json$" . web-mode)
+         ("\\.html.j2$" . web-mode))
+  :init (progn
+          (setq web-mode-markup-indent-offset 2)
+          (setq web-mode-css-indent-offset 2)
+          (setq web-mode-code-indent-offset 2))
+  )
 
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html.j2\\'" . web-mode))
-
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
-
-;; Zen-coding/Emmet
-(require 'emmet-mode)
-
-(add-hook 'web-mode-hook 'emmet-mode)
+;; EditorConfig
+(use-package editorconfig
+  :init (editorconfig-mode 1)
+  )
 
 ;; Flycheck
-(require 'pkg-info)
-(require 'flycheck)
+(use-package flycheck
+  :init (global-flycheck-mode)
+  )
 
-(global-flycheck-mode)
+;; Company
+(use-package company
+  :init (progn
+          (global-company-mode)
+          (setq company-idle-delay 0)
+          (setq company-minimum-prefix-length 1))
+  )
+
+;; LSP
+(use-package lsp-mode
+  :init (progn
+          (setq lsp-enable-snippet nil)
+          )
+  )
+
+(use-package lsp-ui
+  :init (setq lsp-ui-doc-enable nil)
+  :hook (lsp-mode . lsp-ui-mode)
+  )
+
+;; Python + LSP Python MS Server
+(use-package python
+  :init (add-hook 'python-mode-hook 'lsp)
+  )
+
+(use-package lsp-python-ms
+  :init (setq lsp-python-ms-auto-install-server t)
+  )
+
+;; Go + LSP
+(use-package go-mode
+  :init (progn
+          (defun lsp-go-install-save-hooks ()
+            (add-hook 'before-save-hook 'lsp-format-buffer t t)
+            (add-hook 'before-save-hook 'lsp-organize-imports t t))
+          (add-hook 'go-mode-hook 'lsp)
+          (add-hook 'go-mode-hook 'lsp-go-install-save-hooks))
+  )
+
 
 ;;;; Style
 
 ;; Spaceline
-(require 'spaceline-all-the-icons)
-
-(spaceline-all-the-icons-theme)
-
-(spaceline-all-the-icons--setup-neotree)
-
-(spaceline-toggle-all-the-icons-buffer-position-on)
-(spaceline-toggle-all-the-icons-projectile-on)
-(spaceline-toggle-all-the-icons-buffer-path-on)
-
-(spaceline-toggle-all-the-icons-hud-off)
-(spaceline-toggle-all-the-icons-time-off)
-
-(setq spaceline-all-the-icons-separator-type 'none)
-(setq spaceline-all-the-icons-icon-set-modified 'circle)
-(setq spaceline-all-the-icons-hide-long-buffer-path t)
-
-(when (string-equal system-type "darwin")
-  (setq powerline-image-apple-rgb t))
+(use-package spaceline-all-the-icons
+  :init (progn
+          (spaceline-all-the-icons-theme)
+          (spaceline-all-the-icons--setup-neotree)
+          (spaceline-toggle-all-the-icons-buffer-position-on)
+          (spaceline-toggle-all-the-icons-projectile-on)
+          (spaceline-toggle-all-the-icons-buffer-path-on)
+          (spaceline-toggle-all-the-icons-hud-off)
+          (spaceline-toggle-all-the-icons-time-off)
+          (setq spaceline-all-the-icons-separator-type 'none)
+          (setq spaceline-all-the-icons-icon-set-modified 'circle)
+          (setq spaceline-all-the-icons-hide-long-buffer-path t)
+          (when (string-equal system-type "darwin")
+            (setq powerline-image-apple-rgb t)))
+  )
 
 ;; Doom
-(require 'doom-themes)
-(require 'doom-themes-ext-neotree)
-(require 'doom-themes-ext-org)
-(require 'doom-themes-ext-visual-bell)
-
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic t)
-
-(load-theme 'doom-tomorrow-night t)
-
-(doom-themes-neotree-config)
-(doom-themes-org-config)
-(doom-themes-visual-bell-config)
+(use-package doom-themes
+  :init (progn
+          (setq doom-themes-enable-bold t
+                doom-themes-enable-italic t)
+          (load-theme 'doom-tomorrow-night t)
+          (doom-themes-neotree-config)
+          (doom-themes-org-config)
+          (doom-themes-visual-bell-config))
+  )
 
 ;; Customize colors
 (set-face-foreground 'git-gutter:modified "orange")
