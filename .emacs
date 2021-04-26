@@ -75,6 +75,9 @@
 ;; Don't create backup files (*~)
 (setq make-backup-files nil)
 
+;; Always follow symlinks
+(setq find-file-visit-truename t)
+
 ;; Mark ugly stuff
 (require 'whitespace)
 
@@ -180,10 +183,10 @@
  '(git-gutter:modified-sign "~")
  '(git-gutter:deleted-sign "-"))
 
-;; Auto-Complete
-(require 'auto-complete-config)
+;; Company
+(require 'company)
 
-(ac-config-default)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; EditorConfig
 (require 'editorconfig)
