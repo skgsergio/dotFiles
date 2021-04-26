@@ -10,6 +10,9 @@
 ;;; Code:
 ;;
 
+;;; Set a high GC threshold to have a quicker boot time
+(setq gc-cons-threshold 1000000000)
+
 ;;; OS Config
 
 ;; macOS config
@@ -336,5 +339,11 @@
 (setq my-font "Source Code Pro")
 (set-face-attribute 'default nil :family my-font :height 110)
 (set-face-attribute 'fixed-pitch-serif nil :family my-font)
+
+;;; Run GC and set a lower GC threshold
+(garbage-collect)
+
+;; Keep GC thresholda bit higher to keep LSP happy
+(setq gc-cons-threshold 100000000)
 
 ;;; .emacs ends here
