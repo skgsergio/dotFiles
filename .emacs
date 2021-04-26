@@ -41,6 +41,9 @@
 
 ;;; Base config
 
+;; Keep custom variables out of this file
+(setq custom-file (concat user-emacs-directory "custom.el"))
+
 ;; No startup screen
 (setq inhibit-startup-screen t)
 
@@ -146,28 +149,10 @@
 ;; Projectile
 (use-package projectile)
 
-;; NeoTree
-(use-package neotree
-  :init (progn
-          (setq neo-force-change-root t)
-          (setq neo-autorefresh t)
+;; Tremacs
+(use-package treemacs)
 
-          (defun neotree-toggle-with-projectile ()
-            "Toggle neotree using projectile."
-            (interactive)
-            (let ((nttp-file-name (buffer-file-name)))
-              (if (neo-global--window-exists-p)
-                  (neotree-hide)
-                (when (and (fboundp 'projectile-project-p)
-                           (projectile-project-p)
-                           (fboundp 'projectile-project-root))
-                  (neo-global--open-dir (projectile-project-root)))
-                (if nttp-file-name
-                    (neotree-find nttp-file-name)
-                  (neotree-show)))))
-
-          (global-set-key [f8] 'neotree-toggle-with-projectile))
-  )
+(use-package treemacs-projectile)
 
 ;; Emojify
 (use-package emojify
@@ -290,6 +275,10 @@
   :hook (lsp-mode . lsp-ui-mode)
   )
 
+(use-package lsp-treemacs
+  :init (lsp-treemacs-sync-mode 1)
+  )
+
 ;; Python + LSP Python MS Server
 (use-package python
   :init (add-hook 'python-mode-hook 'lsp)
@@ -316,7 +305,6 @@
 (use-package spaceline-all-the-icons
   :init (progn
           (spaceline-all-the-icons-theme)
-          (spaceline-all-the-icons--setup-neotree)
           (spaceline-toggle-all-the-icons-buffer-position-on)
           (spaceline-toggle-all-the-icons-projectile-on)
           (spaceline-toggle-all-the-icons-buffer-path-on)
@@ -335,7 +323,7 @@
           (setq doom-themes-enable-bold t
                 doom-themes-enable-italic t)
           (load-theme 'doom-tomorrow-night t)
-          (doom-themes-neotree-config)
+          (doom-themes-treemacs-config)
           (doom-themes-org-config)
           (doom-themes-visual-bell-config))
   )
