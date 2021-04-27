@@ -270,7 +270,6 @@
   )
 
 (use-package lsp-ui
-  :init (setq lsp-ui-doc-enable nil)
   :hook (lsp-mode . lsp-ui-mode)
   )
 
