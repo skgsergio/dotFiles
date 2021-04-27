@@ -266,7 +266,8 @@
 (use-package lsp-mode
   :init (progn
           (setq lsp-enable-snippet nil)
-          (setq read-process-output-max (* (* 1024 1024) 2)))
+          (setq lsp-idle-delay 1.0)
+          (setq read-process-output-max (* (* 1024 1024) 3)))
   )
 
 (use-package lsp-ui
@@ -288,6 +289,7 @@
 ;; Python + LSP Python MS Server
 (use-package python-mode
   :init (add-hook 'python-mode-hook 'lsp)
+  :mode ("\\.py$" . python-mode)
   )
 
 (use-package lsp-python-ms
