@@ -254,6 +254,10 @@
   :init (global-flycheck-mode)
   )
 
+;; Yasnippet
+(use-package yasnippet
+  :init (yas-global-mode 1))
+
 ;; Company
 (use-package company
   :init (progn
@@ -306,14 +310,12 @@
           (add-hook 'go-mode-hook 'lsp-go-install-save-hooks))
   )
 
-
-;;;; Style
+;;; Style
 
 ;; Spaceline
 (use-package spaceline-all-the-icons
   :init (progn
           (spaceline-all-the-icons-theme)
-          (spaceline-toggle-all-the-icons-buffer-position-on)
           (spaceline-toggle-all-the-icons-projectile-on)
           (spaceline-toggle-all-the-icons-buffer-path-on)
           (spaceline-toggle-all-the-icons-hud-off)
