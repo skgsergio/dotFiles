@@ -76,9 +76,6 @@
 ;; Always follow symlinks
 (setq find-file-visit-truename t)
 
-;; Ctrl+l : Goto Line
-(global-set-key "\C-l" 'goto-line)
-
 ;; Remove trailing withespaces on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -181,8 +178,6 @@
 (use-package org
   :init (progn
           (require 'ox-latex)
-          (add-hook 'org-mode-hook 'flyspell-mode)
-          (add-hook 'org-mode-hook 'auto-fill-mode)
           (add-to-list 'org-latex-packages-alist '("" "minted"))
           (setq org-latex-caption-above nil)
           (setq org-latex-listings 'minted)
@@ -191,6 +186,8 @@
                   ("breaklines" "true")))
           (setq org-latex-pdf-process
                 '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f")))
+  :hook ((org-mode . flyspell-mode)
+         (org-mode . auto-fill-mode))
   )
 
 ;; org-mode: RevealJS
@@ -201,11 +198,10 @@
 
 ;; Markdown-mode
 (use-package markdown-mode
-  :init (progn
-          (add-hook 'markdown-mode-hook 'flyspell-mode)
-          (add-hook 'markdown-mode-hook 'auto-fill-mode))
   :mode (("\\.markdown$" . markdown-mode)
          ("\\.md$" . markdown-mode))
+  :hook ((markdown-mode . flyspell-mode)
+         (markdown-mode . auto-fill-mode))
   )
 
 ;; YAML mode
@@ -216,7 +212,7 @@
 
 ;; terraform-mode
 (use-package terraform-mode
-  :init (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
+  :hook (terraform-mode . terraform-format-on-save-mode)
   )
 
 ;; dockerfile-mode
@@ -272,6 +268,7 @@
           (setq lsp-enable-snippet nil)
           (setq lsp-idle-delay 1.0)
           (setq read-process-output-max (* (* 1024 1024) 3)))
+  :hook ((c-mode . lsp-deferred))
   )
 
 (use-package lsp-ui
@@ -292,8 +289,8 @@
 
 ;; Python + LSP Python MS Server
 (use-package python-mode
-  :init (add-hook 'python-mode-hook 'lsp)
   :mode ("\\.py$" . python-mode)
+  :hook (python-mode . lsp-deferred)
   )
 
 (use-package lsp-python-ms
@@ -302,12 +299,11 @@
 
 ;; Go + LSP
 (use-package go-mode
-  :init (progn
-          (defun lsp-go-install-save-hooks ()
-            (add-hook 'before-save-hook 'lsp-format-buffer t t)
-            (add-hook 'before-save-hook 'lsp-organize-imports t t))
-          (add-hook 'go-mode-hook 'lsp)
-          (add-hook 'go-mode-hook 'lsp-go-install-save-hooks))
+  :init (defun lsp-go-install-save-hooks ()
+          (add-hook 'before-save-hook 'lsp-format-buffer t t)
+          (add-hook 'before-save-hook 'lsp-organize-imports t t))
+  :hook ((go-mode . lsp-deferred)
+         (go-mode . lsp-go-install-save-hooks))
   )
 
 ;;; Style
