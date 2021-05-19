@@ -12,7 +12,7 @@ if [[ -d "$HOME/bin" ]]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-EDITOR="emacs -nw"
+EDITOR="emacs"
 
 alias difff="git diff --no-index"
 
