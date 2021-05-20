@@ -175,6 +175,9 @@
   )
 
 ;; org-mode
+; As org is builtin we have to do this to force use-package fetching the package from the repo
+(assq-delete-all 'org package--builtins)
+(assq-delete-all 'org package--builtin-versions)
 (use-package org
   :init (progn
           (require 'ox-latex)
@@ -339,7 +342,7 @@
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "dark orange")
 
 ;; Customize fonts
-(setq my-font "Source Code Pro")
+(defvar my-font "Source Code Pro")
 (set-face-attribute 'default nil :family my-font :height 110)
 (set-face-attribute 'fixed-pitch-serif nil :family my-font)
 
