@@ -266,6 +266,7 @@
   )
 
 ;; LSP
+(setq lsp-keymap-prefix "C-l")
 (use-package lsp-mode
   :init (progn
           (setq lsp-enable-snippet nil)
