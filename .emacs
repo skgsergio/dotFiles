@@ -119,6 +119,10 @@
 
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
+;; ido + icomplete
+(ido-mode 1)
+(icomplete-mode 1)
+
 ;;; Configure package
 
 (require 'package)
