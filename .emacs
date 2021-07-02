@@ -50,7 +50,8 @@
 ;; No startup screen
 (setq inhibit-startup-screen t)
 
-;; DIE {TOOL,SCROLL} BAR!!
+;; DIE {MENU,TOOL,SCROLL} BAR!!
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
@@ -141,6 +142,9 @@
 (require 'use-package-ensure)
 
 (setq use-package-always-ensure t)
+
+;; Magit
+(use-package magit)
 
 ;; Projectile
 (use-package projectile)
