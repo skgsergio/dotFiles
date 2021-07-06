@@ -37,9 +37,8 @@
                                            (goto-char (point-max))
                                            (delete-char -1)
                                            (buffer-string))))
-  (defun browse-url-windows-chrome-from-wsl (url &optional new-window)
-    (shell-command (format "explorer.exe \"%s\"; true" url)))
-  (setq browse-url-browser-function 'browse-url-windows-chrome-from-wsl)
+  (setq browse-url-browser-function 'browse-url-generic)
+  (setq browse-url-generic-program "wslview")
   (message "Loaded WSL config."))
 
 ;;; Base config
