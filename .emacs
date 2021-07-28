@@ -316,6 +316,12 @@
          (go-mode . lsp-go-install-save-hooks))
   )
 
+;; Db + LSP
+(use-package csharp-mode
+  :mode ("\\.cs$" . csharp-mode)
+  :hook (csharp-mode . lsp-deferred)
+  )
+
 ;;; Style
 
 ;; Spaceline
