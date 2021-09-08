@@ -16,7 +16,7 @@
 ;;; OS Config
 
 ;; macOS config
-(when (string-equal system-type "darwin")
+(when (string-equal "darwin" system-type)
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
   (setq mac-option-key-is-meta nil)
@@ -31,12 +31,8 @@
   (message "Loaded macOS config."))
 
 ;; WSL config
-(when (and (string-equal system-type "gnu/linux")
-           (string-match "microsoft"
-                         (with-temp-buffer (shell-command "uname -r" t)
-                                           (goto-char (point-max))
-                                           (delete-char -1)
-                                           (buffer-string))))
+(when (and (string-equal "gnu/linux" system-type)
+           (string-match "[Mm]icrosoft" operating-system-release))
   (setq browse-url-browser-function 'browse-url-generic)
   (setq browse-url-generic-program "wslview")
   (message "Loaded WSL config."))
