@@ -2,10 +2,13 @@
 # oh-my-zsh config
 ZSH_THEME="gentoo-advanced"
 
-plugins=($plugins zsh-autosuggestions zsh-syntax-highlighting)
+plugins=($plugins zsh-autosuggestions zsh-syntax-highlighting zsh-autocomplete)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 bindkey '^ ' autosuggest-execute
+
+zstyle ':autocomplete:*' min-delay 0.25
+zstyle ':autocomplete:*' min-input 1
 
 # Other stuff
 if [[ -d "$HOME/bin" ]]; then
