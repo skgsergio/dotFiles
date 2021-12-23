@@ -278,6 +278,15 @@
   )
 
 (use-package lsp-ui
+  :init (progn
+          (setq lsp-ui-sideline-show-diagnostics t)
+          (setq lsp-ui-sideline-show-hover nil)
+          (setq lsp-ui-sideline-show-code-actions t)
+          (setq lsp-ui-peek-enable t)
+          (setq lsp-ui-doc-enable t)
+          (setq lsp-ui-doc-position 'top)
+          (setq lsp-ui-doc-show-with-cursor t)
+          (setq lsp-ui-doc-show-with-mouse t))
   :hook (lsp-mode . lsp-ui-mode)
   )
 
