@@ -215,11 +215,6 @@
          ("\\.yml$" . yaml-mode))
   )
 
-;; terraform-mode
-(use-package terraform-mode
-  :hook (terraform-mode . terraform-format-on-save-mode)
-  )
-
 ;; dockerfile-mode
 (use-package dockerfile-mode
   :mode ("^Dockerfile" . dockerfile-mode)
@@ -325,6 +320,12 @@
 (use-package csharp-mode
   :mode ("\\.cs$" . csharp-mode)
   :hook (csharp-mode . lsp-deferred)
+  )
+
+;; terraform-mode + LSP
+(use-package terraform-mode
+  :hook ((terraform-mode . terraform-format-on-save-mode)
+         (terraform-mode . lsp-deferred))
   )
 
 ;;; Style
