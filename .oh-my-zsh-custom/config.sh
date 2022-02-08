@@ -2,12 +2,17 @@
 # oh-my-zsh config
 ZSH_THEME="gentoo-advanced"
 
+plugins=($plugins sudo git z python golang kubectl)
+
+# zsh-syntax-highlighting
 plugins=($plugins zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
+# zsh-autosuggestions
 # plugins=($plugins zsh-autosuggestions)
 # bindkey '^ ' autosuggest-execute
 
+# zsh-autocomplete
 plugins=($plugins zsh-autocomplete)
 zstyle ':autocomplete:*' min-delay 0.5
 zstyle ':autocomplete:*' min-input 2
