@@ -2,7 +2,7 @@
 # oh-my-zsh config
 ZSH_THEME="gentoo-advanced"
 
-plugins=($plugins sudo git z python golang kubectl)
+plugins=($plugins sudo git z python golang kubectl gh)
 
 # zsh-syntax-highlighting
 plugins=($plugins zsh-syntax-highlighting)
