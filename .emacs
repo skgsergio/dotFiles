@@ -39,6 +39,9 @@
 
 ;;; Base config
 
+;; Set error as the minimum level that is shown immediately
+(setq warning-minimum-level :error)
+
 ;; Keep custom variables out of this file
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
