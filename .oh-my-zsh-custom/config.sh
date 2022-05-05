@@ -8,23 +8,32 @@ plugins=($plugins sudo git z python golang kubectl gh)
 plugins=($plugins zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
-# zsh-autosuggestions
-# plugins=($plugins zsh-autosuggestions)
-# bindkey '^ ' autosuggest-execute
-
 # zsh-autocomplete
 plugins=($plugins zsh-autocomplete)
 zstyle ':autocomplete:*' min-delay 0.5
 zstyle ':autocomplete:*' min-input 2
 
 # Other stuff
+if [[ -d "$HOME/go/bin" ]]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
+
 if [[ -d "$HOME/bin" ]]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-EDITOR="emacs"
+if command -v podman &> /dev/null; then
+    export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+fi
 
+export EDITOR="emacs"
+
+alias o="xdg-open"
 alias difff="git diff --no-index"
+
+azj() {
+    az $@ | jq
+}
 
 haste() {
     a=$(cat)
