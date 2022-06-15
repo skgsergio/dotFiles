@@ -93,7 +93,7 @@
   (message "Indent buffer: Done.")
   )
 
-(global-set-key "\M-i" 'iwb)
+(global-set-key (kbd "M-i") 'iwb)
 
 ;; Mark ugly stuff
 (require 'whitespace)
@@ -114,7 +114,7 @@
     (message "Dictionary switched from %s to %s" dic change)
     ))
 
-(global-set-key "\C-cf" 'spell-switch-dictionary)
+(global-set-key (kbd "C-c f") 'spell-switch-dictionary)
 
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)
 
@@ -216,7 +216,7 @@
 ;; YAML mode
 (use-package yaml-mode
   :mode (("\\.yaml$" . yaml-mode)
-         ("\\.yml$" . yaml-mode))
+        ("\\.yml$" . yaml-mode))
   )
 
 ;; dockerfile-mode
@@ -365,9 +365,15 @@
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "dark orange")
 
 ;; Customize fonts
-(defvar my-font "Source Code Pro")
-(set-face-attribute 'default nil :family my-font :height 110)
-(set-face-attribute 'fixed-pitch-serif nil :family my-font)
+(defvar my-font-family "Source Code Pro")
+(defvar my-font-size 110)
+
+(set-face-attribute 'default nil :family my-font-family :height my-font-size)
+(set-face-attribute 'fixed-pitch-serif nil :family my-font-family)
+
+;; Keybindings for increasing font size (for screen sharing and so)
+(global-set-key (kbd "M-+") (lambda () (interactive) (set-face-attribute 'default nil :height (+ my-font-size 20))))
+(global-set-key (kbd "M--") (lambda () (interactive) (set-face-attribute 'default nil :height my-font-size)))
 
 ;;; Run GC and set a lower GC threshold
 (garbage-collect)
