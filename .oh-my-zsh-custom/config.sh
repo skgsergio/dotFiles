@@ -10,8 +10,8 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 # zsh-autocomplete
 plugins=($plugins zsh-autocomplete)
-zstyle ':autocomplete:*' min-delay 0.5
-zstyle ':autocomplete:*' min-input 2
+#zstyle ':autocomplete:*' min-delay 0.5
+#zstyle ':autocomplete:*' min-input 2
 
 # Other stuff
 if [[ -d "$HOME/go/bin" ]]; then
