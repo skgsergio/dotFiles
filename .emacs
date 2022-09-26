@@ -180,6 +180,15 @@
           (setq ag-reuse-buffers 't))
   )
 
+;; multiple-cursors
+(use-package multiple-cursors
+  :bind (:map global-map
+              ("C-S-c C-S-c" . 'mc/edit-lines)
+              ("C->" . 'mc/mark-next-like-this)
+              ("C-<" . 'mc/mark-previous-like-this)
+              ("C-c C-<" . 'mc/mark-all-like-this))
+  )
+
 ;; org-mode
 ; As org is builtin we have to do this to force use-package fetching the package from the repo
 (assq-delete-all 'org package--builtins)
