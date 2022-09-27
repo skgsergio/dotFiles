@@ -13,6 +13,12 @@
 ;;; Set a high GC threshold to have a quicker boot time
 (setq gc-cons-threshold 1000000000)
 
+;;; Native Comp
+;; To prune old versions from compile cache run: native-compile-prune-cache
+
+;; Compile all site-lisp on demand
+(setq native-comp-deferred-compilation t)
+
 ;;; OS Config
 
 ;; macOS config
