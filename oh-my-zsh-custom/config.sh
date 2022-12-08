@@ -30,6 +30,7 @@ export EDITOR="emacs"
 
 alias o="xdg-open"
 alias difff="git diff --no-index"
+alias ip="ip --color=auto"
 
 azj() {
     az $@ | jq
