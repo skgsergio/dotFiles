@@ -14,10 +14,10 @@
 (setq gc-cons-threshold 1000000000)
 
 ;;; Native Comp
-;; To prune old versions from compile cache run: native-compile-prune-cache
 
 ;; Compile all site-lisp on demand
 (setq native-comp-deferred-compilation t)
+(setq native-compile-prune-cache t)
 
 ;;; OS Config
 
