@@ -335,6 +335,11 @@
          (go-mode . lsp-go-install-save-hooks))
   )
 
+;; Rust + LSP
+(use-package rust-mode
+  :hook (rust-mode . lsp-deferred)
+  )
+
 ;; Db + LSP
 (use-package csharp-mode
   :mode ("\\.cs$" . csharp-mode)

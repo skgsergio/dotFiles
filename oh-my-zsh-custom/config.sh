@@ -2,6 +2,8 @@
 # oh-my-zsh config
 ZSH_THEME="gentoo-advanced"
 
+ENABLE_CORRECTION="true"
+
 plugins=($plugins sudo git z python golang kubectl gh)
 
 # zsh-syntax-highlighting
