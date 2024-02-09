@@ -32,20 +32,15 @@ if command -v podman &> /dev/null; then
     export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 fi
 
+if command -v batcat &> /dev/null; then
+    alias bat="batcat"
+fi
+
 export EDITOR="emacs"
 
 alias o="xdg-open"
 alias difff="git diff --no-index"
 alias ip="ip --color=auto"
-
-azj() {
-    az $@ | jq
-}
-
-haste() {
-    a=$(cat)
-    curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'
-}
 
 chkcert() {
     if [ "$#" -eq 2 ]; then
