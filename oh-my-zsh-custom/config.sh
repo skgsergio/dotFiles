@@ -30,6 +30,8 @@ fi
 
 if command -v podman &> /dev/null; then
     export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+elif command -v docker &> /dev/null; then
+    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 fi
 
 if command -v batcat &> /dev/null; then
