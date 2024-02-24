@@ -2,11 +2,10 @@
 #          FILE:  gentoo-advanced.zsh-theme
 #   DESCRIPTION:  Gentoo's bashrc clone theme for oh-my-zsh.
 #        AUTHOR:  Sergio Conde Gómez (skgsergio@gmail.com)
-#       VERSION:  1.1
 # ------------------------------------------------------------------------------
 
 # Return Code
-return_code="%(?..%{$fg_bold[red]%}[Err: %?] %{$reset_color%})"
+ZSH_THEME_GA_RETURN_CODE="%(?..%{$fg_bold[red]%}[%?] %{$reset_color%})"
 
 # Format for git_prompt_info()
 ZSH_THEME_GIT_PROMPT_PREFIX=""
@@ -16,10 +15,8 @@ ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-# Format for git_prompt_ahead()
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%}!"
-
 # Format for git_prompt_status()
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNMERGED=" %{$fg_bold[red]%}/"
 ZSH_THEME_GIT_PROMPT_DELETED=" %{$fg_bold[red]%}-"
 ZSH_THEME_GIT_PROMPT_RENAMED=" %{$fg_bold[blue]%}~"
@@ -37,4 +34,4 @@ if [[ $UID -eq 0 ]]; then
 else
     PROMPT='%{$fg_bold[green]%}%n@%m%{$fg[white]%} %{$fg_bold[blue]%}%~%u%{$reset_color%} %{$fg_bold[blue]%}$%{$reset_color%} '
 fi
-RPROMPT='${return_code}%{$fg_bold[green]%}$(current_branch)$(parse_git_dirty)$(git_prompt_ahead)$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
+RPROMPT='${ZSH_THEME_GA_RETURN_CODE}%{$fg_bold[green]%}$(current_branch)$(parse_git_dirty)$(git_prompt_status)$(git_prompt_short_sha)%{$reset_color%}'
