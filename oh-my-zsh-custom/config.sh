@@ -4,7 +4,7 @@ ZSH_THEME="gentoo-advanced"
 
 ENABLE_CORRECTION="true"
 
-plugins=($plugins sudo git z python golang kubectl gh)
+plugins=($plugins sudo common-aliases command-not-found z git python golang kubectl podman docker)
 
 # zsh-syntax-highlighting
 plugins=($plugins zsh-syntax-highlighting)
@@ -31,7 +31,7 @@ fi
 if command -v podman &> /dev/null; then
     export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 elif command -v docker &> /dev/null; then
-    export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+    export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
 fi
 
 if command -v batcat &> /dev/null; then
