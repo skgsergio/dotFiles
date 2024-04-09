@@ -1,4 +1,0 @@
-OutFormat
-{
- "%f%b%l%b%c%b%k: %m!n"
-}

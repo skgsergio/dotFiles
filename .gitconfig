@@ -1,0 +1,33 @@
+# git config --global include.path ~/.dotFiles/.gitconfig
+
+[core]
+	pager = delta
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[help]
+	autocorrect = 25
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[delta]
+	line-numbers = true
+	navigate = true
+	light = false
+	features = decorations
+
+[delta "decorations"]
+	file-style = yellow bold
+	file-decoration-style = yellow ul
+	hunk-header-decoration-style = yellow box
