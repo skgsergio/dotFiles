@@ -10,7 +10,7 @@
 	autoSetupRemote = true
 
 [help]
-	autocorrect = 25
+	autocorrect = 10
 
 [interactive]
 	diffFilter = delta --color-only
