@@ -44,6 +44,10 @@ alias o="xdg-open"
 alias difff="git diff --no-index"
 alias ip="ip --color=auto"
 
+tfdocs() {
+    docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:latest markdown /terraform-docs
+}
+
 chkcert() {
     if [ "$#" -eq 2 ]; then
         chk_srv="$1"
