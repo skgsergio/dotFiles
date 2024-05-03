@@ -340,16 +340,15 @@
   :hook (rust-mode . lsp-deferred)
   )
 
-;; Db + LSP
-(use-package csharp-mode
-  :mode ("\\.cs$" . csharp-mode)
-  :hook (csharp-mode . lsp-deferred)
-  )
-
 ;; terraform-mode + LSP
 (use-package terraform-mode
   :hook ((terraform-mode . terraform-format-on-save-mode)
          (terraform-mode . lsp-deferred))
+  )
+
+;; jsonnet + LSP
+(use-package jsonnet-mode
+  :hook (jsonnet-mode . lsp-deferred)
   )
 
 ;;; Style
