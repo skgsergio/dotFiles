@@ -348,6 +348,7 @@
 
 ;; jsonnet + LSP
 (use-package jsonnet-mode
+  :init (require 'lsp-jsonnet)
   :hook (jsonnet-mode . lsp-deferred)
   )
 
