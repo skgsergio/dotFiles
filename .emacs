@@ -220,25 +220,6 @@
 ;; htmlize for exporting code highlighted to html
 (use-package htmlize)
 
-;; Markdown-mode
-(use-package markdown-mode
-  :mode (("\\.markdown$" . markdown-mode)
-         ("\\.md$" . markdown-mode))
-  :hook ((markdown-mode . flyspell-mode)
-         (markdown-mode . auto-fill-mode))
-  )
-
-;; YAML mode
-(use-package yaml-mode
-  :mode (("\\.yaml$" . yaml-mode)
-        ("\\.yml$" . yaml-mode))
-  )
-
-;; dockerfile-mode
-(use-package dockerfile-mode
-  :mode ("^Dockerfile" . dockerfile-mode)
-  )
-
 ;; web-mode
 (use-package web-mode
   :mode (("\\.phtml$" . web-mode)
@@ -285,10 +266,14 @@
 (setq lsp-keymap-prefix "C-l")
 (use-package lsp-mode
   :init (progn
-          (setq lsp-enable-snippet nil)
-          (setq lsp-idle-delay 1.0)
-          (setq read-process-output-max (* (* 1024 1024) 3)))
-  :hook ((c-mode . lsp-deferred))
+          (setq read-process-output-max (* 1024 1024 3))
+          (setq lsp-idle-delay 0.500)
+          (setq lsp-enable-links t)
+          (setq lsp-semantic-tokens-enable t)
+          (setq lsp-semantic-tokens-honor-refresh-requests t)
+          )
+  :hook ((c-mode . lsp-deferred)
+         (sh-mode . lsp-deferred))
   )
 
 (use-package lsp-ui
@@ -322,10 +307,6 @@
   :hook (python-mode . lsp-deferred)
   )
 
-(use-package lsp-python-ms
-  :init (setq lsp-python-ms-auto-install-server t)
-  )
-
 ;; Go + LSP
 (use-package go-mode
   :init (defun lsp-go-install-save-hooks ()
@@ -342,6 +323,9 @@
 
 ;; terraform-mode + LSP
 (use-package terraform-mode
+  :init (progn
+          (setq lsp-terraform-ls-enable-show-reference t)
+          (setq lsp-terraform-ls-prefill-required-fields t))
   :hook ((terraform-mode . terraform-format-on-save-mode)
          (terraform-mode . lsp-deferred))
   )
@@ -355,8 +339,30 @@
 ;; LSP Grammarly
 (use-package lsp-grammarly
   :init (require 'lsp-grammarly)
-  :hook ((text-mode . lsp-deferred)
+  :hook (text-mode . lsp-deferred)
+  )
+
+;; Markdown-mode
+(use-package markdown-mode
+  :mode (("\\.markdown$" . markdown-mode)
+         ("\\.md$" . markdown-mode))
+  :hook ((markdown-mode . flyspell-mode)
+         (markdown-mode . auto-fill-mode)
          (markdown-mode . lsp-deferred))
+  )
+
+;; YAML mode
+(use-package yaml-mode
+  :mode (("\\.yaml$" . yaml-mode)
+         ("\\.yml$" . yaml-mode))
+  :hook (yaml-mode . lsp-deferred)
+  )
+
+;; dockerfile-mode
+(use-package dockerfile-mode
+  :mode (("^Dockerfile" . dockerfile-mode)
+         ("Dockerfile$" . dockerfile-mode))
+  :hook (dockerfile-mode . lsp-deferred)
   )
 
 ;;; Style
@@ -405,7 +411,7 @@
 ;;; Run GC and set a lower GC threshold
 (garbage-collect)
 
-;; Keep GC thresholda bit higher to keep LSP happy
+;; Keep GC threshold a bit higher to keep LSP happy
 (setq gc-cons-threshold 100000000)
 
 ;;; .emacs ends here
