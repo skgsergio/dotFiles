@@ -352,6 +352,13 @@
   :hook (jsonnet-mode . lsp-deferred)
   )
 
+;; LSP Grammarly
+(use-package lsp-grammarly
+  :init (require 'lsp-grammarly)
+  :hook ((text-mode . lsp-deferred)
+         (markdown-mode . lsp-deferred))
+  )
+
 ;;; Style
 
 ;; Spaceline
