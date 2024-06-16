@@ -301,13 +301,13 @@
               ("C-x t d" . lsp-treemacs-deps-list))
   )
 
-;; Python + LSP Python MS Server
+;; Python
 (use-package python-mode
   :mode ("\\.py$" . python-mode)
   :hook (python-mode . lsp-deferred)
   )
 
-;; Go + LSP
+;; Go
 (use-package go-mode
   :init (defun lsp-go-install-save-hooks ()
           (add-hook 'before-save-hook 'lsp-format-buffer t t)
@@ -316,12 +316,12 @@
          (go-mode . lsp-go-install-save-hooks))
   )
 
-;; Rust + LSP
+;; Rust
 (use-package rust-mode
   :hook (rust-mode . lsp-deferred)
   )
 
-;; terraform-mode + LSP
+;; terraform-mode
 (use-package terraform-mode
   :init (progn
           (setq lsp-terraform-ls-enable-show-reference t)
@@ -330,7 +330,7 @@
          (terraform-mode . lsp-deferred))
   )
 
-;; jsonnet + LSP
+;; jsonnet
 (use-package jsonnet-mode
   :init (require 'lsp-jsonnet)
   :hook (jsonnet-mode . lsp-deferred)
@@ -363,6 +363,11 @@
   :mode (("^Dockerfile" . dockerfile-mode)
          ("Dockerfile$" . dockerfile-mode))
   :hook (dockerfile-mode . lsp-deferred)
+  )
+
+;; Typescript
+(use-package typescript-mode
+  :hook (typescript-mode . lsp-deferred)
   )
 
 ;;; Style
