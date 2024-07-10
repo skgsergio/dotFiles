@@ -71,6 +71,7 @@ chkcert() {
 
 curltime() {
     curl -w "\
+-------------------------\n\
    namelookup:  %{time_namelookup}s\n\
       connect:  %{time_connect}s\n\
    appconnect:  %{time_appconnect}s\n\
