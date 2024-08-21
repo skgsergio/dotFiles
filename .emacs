@@ -43,6 +43,15 @@
   (setq browse-url-generic-program "wslview")
   (message "Loaded WSL config."))
 
+;; Linux config
+(when (and (string-equal "gnu/linux" system-type)
+           (not (string-match "[Mm]icrosoft" operating-system-release)))
+  (add-to-list 'default-frame-alist '(undecorated . t))
+  (add-to-list 'default-frame-alist '(drag-internal-border . t))
+  (add-to-list 'default-frame-alist '(internal-border-width . 2))
+  (add-to-list 'default-frame-alist '(alpha-background . 95))
+  (message "Loaded Linux config."))
+
 ;;; Base config
 
 ;; Set error as the minimum level that is shown immediately
@@ -368,6 +377,10 @@
 ;; Typescript
 (use-package typescript-mode
   :hook (typescript-mode . lsp-deferred)
+  )
+
+(use-package vcl-mode
+  :mode ("\\.vtc" . vcl-mode)
   )
 
 ;;; Style

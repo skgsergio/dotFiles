@@ -26,6 +26,7 @@
 	navigate = true
 	light = false
 	features = decorations
+	max-line-length = 2048
 
 [delta "decorations"]
 	file-style = yellow bold
