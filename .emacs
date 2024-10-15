@@ -49,7 +49,7 @@
   (add-to-list 'default-frame-alist '(undecorated . t))
   (add-to-list 'default-frame-alist '(drag-internal-border . t))
   (add-to-list 'default-frame-alist '(internal-border-width . 2))
-  (add-to-list 'default-frame-alist '(alpha-background . 95))
+  (add-to-list 'default-frame-alist '(alpha-background . 98))
   (message "Loaded Linux config."))
 
 ;;; Base config
