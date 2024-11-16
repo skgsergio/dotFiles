@@ -148,14 +148,18 @@
   (package-refresh-contents))
 
 ;; use-package
-(dolist (package '(use-package))
-  (unless (package-installed-p package)
-    (package-install package)))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 (require 'use-package)
 (require 'use-package-ensure)
 
 (setq use-package-always-ensure t)
+
+;; vc-use-package (to be removed in emacs 30)
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package"))
+(require 'vc-use-package)
 
 ;; Magit
 (use-package magit)
@@ -379,8 +383,15 @@
   :hook (typescript-mode . lsp-deferred)
   )
 
+;; Varnish
 (use-package vcl-mode
   :mode ("\\.vtc" . vcl-mode)
+  )
+
+;; Tinybird
+(use-package tinybird-mode
+  :vc (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode"
+                     :rev :newest)
   )
 
 ;;; Style
