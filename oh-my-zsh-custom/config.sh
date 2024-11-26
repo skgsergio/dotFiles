@@ -15,6 +15,13 @@ plugins=($plugins zsh-autocomplete)
 #zstyle ':autocomplete:*' min-delay 0.5
 #zstyle ':autocomplete:*' min-input 2
 
+# zsh-ssh
+if command -v fzf 2>&1 > /dev/null; then
+    plugins=($plugins zsh-ssh)
+else
+    echo "[zsh-ssh] Not loading plugin, missing fzf."
+fi
+
 # Other stuff
 if [[ -d "$HOME/go/bin" ]]; then
     export PATH="$HOME/go/bin:$PATH"

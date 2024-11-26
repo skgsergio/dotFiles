@@ -4,3 +4,6 @@
 [submodule ".oh-my-zsh-custom/plugins/zsh-autocomplete"]
 	path = oh-my-zsh-custom/plugins/zsh-autocomplete
 	url = https://github.com/marlonrichert/zsh-autocomplete.git
+[submodule "oh-my-zsh-custom/plugins/zsh-ssh"]
+	path = oh-my-zsh-custom/plugins/zsh-ssh
+	url = https://github.com/sunlei/zsh-ssh.git
