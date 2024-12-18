@@ -417,13 +417,13 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-tomorrow-night t)
+  (load-theme 'doom-material-dark t)
   (doom-themes-treemacs-config)
   (doom-themes-org-config)
   (doom-themes-visual-bell-config))
 
 ;; Customize colors
-(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "dark orange")
+(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange2")
 
 ;; Customize fonts
 (defvar my-font-family "Source Code Pro")
