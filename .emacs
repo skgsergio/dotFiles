@@ -126,8 +126,7 @@
          (change (if (string= dic "american") "castellano" "american")))
     (ispell-change-dictionary change)
     (flyspell-buffer)
-    (message "Dictionary switched from %s to %s" dic change)
-    ))
+    (message "Dictionary switched from %s to %s" dic change)))
 
 (global-set-key (kbd "C-c f") 'spell-switch-dictionary)
 
@@ -169,63 +168,64 @@
 
 ;; Tremacs
 (use-package treemacs
-  :bind (:map global-map
-              ("C-x t t" . treemacs))
-  )
+  :bind
+  (:map global-map
+        ("C-x t t" . treemacs)))
 
 (use-package treemacs-projectile)
 
 ;; Emojify
 (use-package emojify
-  :init (progn
-          (global-emojify-mode)
-          (setq emojify-emoji-styles '(unicode)))
-  )
+  :config
+  (setq emojify-emoji-styles '(unicode))
+  :hook
+  (after-init . global-emojify-mode))
 
 ;; Git-gutter
 (use-package git-gutter
-  :init (progn
-          (global-git-gutter-mode)
-          (setq git-gutter:added-sign "+")
-          (setq git-gutter:deleted-sign "-")
-          (setq git-gutter:modified-sign "~")
-          (setq git-gutter:separator-sign " "))
-  )
+  :config
+  (setq git-gutter:added-sign "+")
+  (setq git-gutter:deleted-sign "-")
+  (setq git-gutter:modified-sign "~")
+  (setq git-gutter:separator-sign " ")
+  (set-face-foreground 'git-gutter:modified "orange")
+  :hook
+  (after-init . global-git-gutter-mode))
 
 ;; ag: The Silver Searcher
 (use-package ag
-  :init (progn
-          (setq ag-highlight-search 't)
-          (setq ag-reuse-buffers 't))
-  )
+  :config
+  (setq ag-highlight-search 't)
+  (setq ag-reuse-buffers 't))
 
 ;; multiple-cursors
 (use-package multiple-cursors
-  :bind (:map global-map
-              ("C-S-c C-S-c" . 'mc/edit-lines)
-              ("C->" . 'mc/mark-next-like-this)
-              ("C-<" . 'mc/mark-previous-like-this)
-              ("C-c C-<" . 'mc/mark-all-like-this))
-  )
+  :bind
+  (:map global-map
+        ("C-S-c C-S-c" . 'mc/edit-lines)
+        ("C->" . 'mc/mark-next-like-this)
+        ("C-<" . 'mc/mark-previous-like-this)
+        ("C-c C-<" . 'mc/mark-all-like-this)))
 
 ;; org-mode
 ; As org is builtin we have to do this to force use-package fetching the package from the repo
-(assq-delete-all 'org package--builtins)
-(assq-delete-all 'org package--builtin-versions)
 (use-package org
-  :init (progn
-          (require 'ox-latex)
-          (add-to-list 'org-latex-packages-alist '("" "minted"))
-          (setq org-latex-caption-above nil)
-          (setq org-latex-listings 'minted)
-          (setq org-latex-minted-options
-                '(("linenos" "true")
-                  ("breaklines" "true")))
-          (setq org-latex-pdf-process
-                '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f")))
-  :hook ((org-mode . flyspell-mode)
-         (org-mode . auto-fill-mode))
-  )
+  :init
+  (assq-delete-all 'org package--builtins)
+  (assq-delete-all 'org package--builtin-versions)
+  :config
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-caption-above nil)
+  (setq org-latex-listings 'minted)
+  (setq org-latex-minted-options
+        '(("linenos" "true")
+          ("breaklines" "true")))
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf %f"))
+  :hook
+  (org-mode . flyspell-mode)
+  (org-mode . auto-fill-mode))
 
 ;; org-mode: RevealJS
 (use-package ox-reveal)
@@ -235,195 +235,194 @@
 
 ;; web-mode
 (use-package web-mode
-  :mode (("\\.phtml$" . web-mode)
-         ("\\.php$" . web-mode)
-         ("\\.[agj]sp$" . web-mode)
-         ("\\.as[cp]x$" . web-mode)
-         ("\\.erb$" . web-mode)
-         ("\\.mustache$" . web-mode)
-         ("\\.djhtml$" . web-mode)
-         ("\\.css$" . web-mode)
-         ("\\.html$" . web-mode)
-         ("\\.js$" . web-mode)
-         ("\\.json$" . web-mode)
-         ("\\.html.j2$" . web-mode))
-  :init (progn
-          (setq web-mode-markup-indent-offset 2)
-          (setq web-mode-css-indent-offset 2)
-          (setq web-mode-code-indent-offset 2))
-  )
+  :mode
+  ("\\.phtml$" . web-mode)
+  ("\\.php$" . web-mode)
+  ("\\.[agj]sp$" . web-mode)
+  ("\\.as[cp]x$" . web-mode)
+  ("\\.erb$" . web-mode)
+  ("\\.mustache$" . web-mode)
+  ("\\.djhtml$" . web-mode)
+  ("\\.css$" . web-mode)
+  ("\\.html$" . web-mode)
+  ("\\.js$" . web-mode)
+  ("\\.json$" . web-mode)
+  ("\\.html.j2$" . web-mode))
 
 ;; EditorConfig
 (use-package editorconfig
-  :init (editorconfig-mode 1)
-  )
+  :hook
+  (after-init . editorconfig-mode))
 
 ;; Flycheck
 (use-package flycheck
-  :init (global-flycheck-mode)
-  )
+  :hook
+  (after-init . global-flycheck-mode))
 
 ;; Yasnippet
 (use-package yasnippet
-  :init (yas-global-mode 1))
+  :hook
+  (after-init . yas-global-mode))
 
 ;; Company
 (use-package company
-  :init (progn
-          (global-company-mode)
-          (setq company-idle-delay 0)
-          (setq company-minimum-prefix-length 1))
-  )
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  :hook
+  (after-init . global-company-mode))
 
 ;; LSP
-(setq lsp-keymap-prefix "C-l")
 (use-package lsp-mode
-  :init (progn
-          (setq read-process-output-max (* 1024 1024 3))
-          (setq lsp-idle-delay 0.500)
-          (setq lsp-enable-links t)
-          (setq lsp-semantic-tokens-enable t)
-          (setq lsp-semantic-tokens-honor-refresh-requests t)
-          )
-  :hook ((c-mode . lsp-deferred)
-         (sh-mode . lsp-deferred))
-  )
+  :init
+  (setq lsp-keymap-prefix "C-l")
+  :config
+  (setq read-process-output-max (* 1024 1024 3))
+  (setq lsp-idle-delay 0.500)
+  (setq lsp-enable-links t)
+  (setq lsp-semantic-tokens-enable t)
+  (setq lsp-semantic-tokens-honor-refresh-requests t)
+  :hook
+  (c-mode . lsp-deferred)
+  (sh-mode . lsp-deferred))
 
 (use-package lsp-ui
-  :init (progn
-          (setq lsp-ui-sideline-show-diagnostics t)
-          (setq lsp-ui-sideline-show-hover nil)
-          (setq lsp-ui-sideline-show-code-actions t)
-          (setq lsp-ui-peek-enable t)
-          (setq lsp-ui-doc-enable t)
-          (setq lsp-ui-doc-position 'top)
-          (setq lsp-ui-doc-show-with-cursor t)
-          (setq lsp-ui-doc-show-with-mouse t))
-  :hook (lsp-mode . lsp-ui-mode)
-  )
+  :config
+  (setq lsp-ui-sideline-show-diagnostics t)
+  (setq lsp-ui-sideline-show-hover nil)
+  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-peek-enable t)
+  (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-position 'top)
+  (setq lsp-ui-doc-show-with-cursor t)
+  (setq lsp-ui-doc-show-with-mouse t)
+  :hook
+  (lsp-mode . lsp-ui-mode))
 
 (use-package lsp-treemacs
-  :init (lsp-treemacs-sync-mode 1)
-  :bind (:map global-map
-              ("C-x t e" . lsp-treemacs-errors-list)
-              ("C-x t s" . lsp-treemacs-symbols)
-              ("C-x t r" . lsp-treemacs-references)
-              ("C-x t i" . lsp-treemacs-implementations)
-              ("C-x t c" . lsp-treemacs-call-hierarchy)
-              ("C-x t y" . lsp-treemacs-type-hierarchy)
-              ("C-x t d" . lsp-treemacs-deps-list))
-  )
+  :bind
+  (:map global-map
+        ("C-x t e" . lsp-treemacs-errors-list)
+        ("C-x t s" . lsp-treemacs-symbols)
+        ("C-x t r" . lsp-treemacs-references)
+        ("C-x t i" . lsp-treemacs-implementations)
+        ("C-x t c" . lsp-treemacs-call-hierarchy)
+        ("C-x t y" . lsp-treemacs-type-hierarchy)
+        ("C-x t d" . lsp-treemacs-deps-list))
+  :hook
+  (lsp-mode . lsp-treemacs-sync-mode))
 
 ;; Python
 (use-package python-mode
-  :mode ("\\.py$" . python-mode)
-  :hook (python-mode . lsp-deferred)
-  )
+  :mode
+  ("\\.py$" . python-mode)
+  :hook
+  (python-mode . lsp-deferred))
 
 ;; Go
 (use-package go-mode
-  :init (defun lsp-go-install-save-hooks ()
-          (add-hook 'before-save-hook 'lsp-format-buffer t t)
-          (add-hook 'before-save-hook 'lsp-organize-imports t t))
-  :hook ((go-mode . lsp-deferred)
-         (go-mode . lsp-go-install-save-hooks))
-  )
+  :init
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook 'lsp-format-buffer t t)
+    (add-hook 'before-save-hook 'lsp-organize-imports t t))
+  :hook
+  (go-mode . lsp-go-install-save-hooks)
+  (go-mode . lsp-deferred))
 
 ;; Rust
 (use-package rust-mode
-  :hook (rust-mode . lsp-deferred)
-  )
+  :hook
+  (rust-mode . lsp-deferred))
 
 ;; terraform-mode
 (use-package terraform-mode
-  :init (progn
-          (setq lsp-terraform-ls-enable-show-reference t)
-          (setq lsp-terraform-ls-prefill-required-fields t))
-  :hook ((terraform-mode . terraform-format-on-save-mode)
-         (terraform-mode . lsp-deferred))
-  )
+  :config
+  (setq lsp-terraform-ls-enable-show-reference t)
+  (setq lsp-terraform-ls-prefill-required-fields t)
+  :hook
+  (terraform-mode . terraform-format-on-save-mode)
+  (terraform-mode . lsp-deferred))
 
 ;; jsonnet
 (use-package jsonnet-mode
-  :init (require 'lsp-jsonnet)
-  :hook (jsonnet-mode . lsp-deferred)
-  )
+  :init
+  (require 'lsp-jsonnet)
+  :hook
+  (jsonnet-mode . lsp-deferred))
 
 ;; LSP Grammarly
 (use-package lsp-grammarly
-  :init (require 'lsp-grammarly)
-  :hook (text-mode . lsp-deferred)
-  )
+  :init
+  (require 'lsp-grammarly)
+  :hook
+  (text-mode . lsp-deferred))
 
 ;; Markdown-mode
 (use-package markdown-mode
-  :mode (("\\.markdown$" . markdown-mode)
-         ("\\.md$" . markdown-mode))
-  :hook ((markdown-mode . flyspell-mode)
-         (markdown-mode . auto-fill-mode)
-         (markdown-mode . lsp-deferred))
-  )
+  :mode
+  ("\\.markdown$" . markdown-mode)
+  ("\\.md$" . markdown-mode)
+  :hook
+  (markdown-mode . flyspell-mode)
+  (markdown-mode . auto-fill-mode)
+  (markdown-mode . lsp-deferred))
 
 ;; YAML mode
 (use-package yaml-mode
-  :mode (("\\.yaml$" . yaml-mode)
-         ("\\.yml$" . yaml-mode))
-  :hook (yaml-mode . lsp-deferred)
-  )
+  :mode
+  ("\\.ya?ml$" . yaml-mode)
+  :hook
+  (yaml-mode . lsp-deferred))
 
 ;; dockerfile-mode
 (use-package dockerfile-mode
-  :mode (("^Dockerfile" . dockerfile-mode)
-         ("Dockerfile$" . dockerfile-mode))
-  :hook (dockerfile-mode . lsp-deferred)
-  )
+  :mode
+  ("^Dockerfile" . dockerfile-mode)
+  ("Dockerfile$" . dockerfile-mode)
+  :hook
+  (dockerfile-mode . lsp-deferred))
 
 ;; Typescript
 (use-package typescript-mode
-  :hook (typescript-mode . lsp-deferred)
-  )
+  :hook
+  (typescript-mode . lsp-deferred))
 
 ;; Varnish
 (use-package vcl-mode
-  :mode ("\\.vtc" . vcl-mode)
-  )
+  :mode
+  ("\\.vtc" . vcl-mode))
 
 ;; Tinybird
 (use-package tinybird-mode
-  :vc (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode"
-                     :rev :newest)
-  )
+  :vc (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode" :rev :newest))
 
 ;;; Style
 
 ;; Spaceline
 (use-package spaceline-all-the-icons
-  :init (progn
-          (spaceline-all-the-icons-theme)
-          (spaceline-toggle-all-the-icons-projectile-on)
-          (spaceline-toggle-all-the-icons-buffer-path-on)
-          (spaceline-toggle-all-the-icons-hud-off)
-          (spaceline-toggle-all-the-icons-time-off)
-          (setq spaceline-all-the-icons-separator-type 'none)
-          (setq spaceline-all-the-icons-icon-set-modified 'circle)
-          (setq spaceline-all-the-icons-hide-long-buffer-path t)
-          (when (string-equal system-type "darwin")
-            (setq powerline-image-apple-rgb t)))
-  )
+  :config
+  (spaceline-all-the-icons-theme)
+  (spaceline-toggle-all-the-icons-projectile-on)
+  (spaceline-toggle-all-the-icons-buffer-path-on)
+  (spaceline-toggle-all-the-icons-hud-off)
+  (spaceline-toggle-all-the-icons-time-off)
+  (setq spaceline-all-the-icons-separator-type 'none)
+  (setq spaceline-all-the-icons-icon-set-modified 'circle)
+  (setq spaceline-all-the-icons-hide-long-buffer-path t)
+  (when (string-equal system-type "darwin")
+    (setq powerline-image-apple-rgb t)))
 
 ;; Doom
 (use-package doom-themes
-  :init (progn
-          (setq doom-themes-enable-bold t
-                doom-themes-enable-italic t)
-          (load-theme 'doom-tomorrow-night t)
-          (doom-themes-treemacs-config)
-          (doom-themes-org-config)
-          (doom-themes-visual-bell-config))
-  )
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-tomorrow-night t)
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config)
+  (doom-themes-visual-bell-config))
 
 ;; Customize colors
-(set-face-foreground 'git-gutter:modified "orange")
 (set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "dark orange")
 
 ;; Customize fonts
