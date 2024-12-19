@@ -399,31 +399,25 @@
 ;;; Style
 
 ;; Spaceline
-(use-package spaceline-all-the-icons
+(use-package nerd-icons)
+
+(use-package doom-modeline
   :config
-  (spaceline-all-the-icons-theme)
-  (spaceline-toggle-all-the-icons-projectile-on)
-  (spaceline-toggle-all-the-icons-buffer-path-on)
-  (spaceline-toggle-all-the-icons-hud-off)
-  (spaceline-toggle-all-the-icons-time-off)
-  (setq spaceline-all-the-icons-separator-type 'none)
-  (setq spaceline-all-the-icons-icon-set-modified 'circle)
-  (setq spaceline-all-the-icons-hide-long-buffer-path t)
-  (when (string-equal system-type "darwin")
-    (setq powerline-image-apple-rgb t)))
+  (setq doom-modeline-time nil
+        doom-modeline-env-version nil)
+  :hook
+  (after-init . doom-modeline-mode))
 
 ;; Doom
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
+        doom-themes-enable-italic t
+        doom-themes-padded-modeline t)
   (load-theme 'doom-material-dark t)
   (doom-themes-treemacs-config)
   (doom-themes-org-config)
   (doom-themes-visual-bell-config))
-
-;; Customize colors
-(set-face-attribute 'spaceline-highlight-face nil :foreground "black" :background "orange2")
 
 ;; Customize fonts
 (defvar my-font-family "Source Code Pro")
