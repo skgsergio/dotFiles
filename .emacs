@@ -394,7 +394,24 @@
 
 ;; Tinybird
 (use-package tinybird-mode
-  :vc (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode" :rev :newest))
+  :vc
+  (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode" :rev :newest))
+
+;;; AI
+
+(use-package copilot
+  :vc
+  (copilot :url "https://github.com/copilot-emacs/copilot.el" :rev :newest :branch "main")
+  :hook
+  (prog-mode . copilot-mode)
+  :bind
+  (:map copilot-completion-map
+        ("<tab>" . 'copilot-accept-completion)
+        ("TAB" . 'copilot-accept-completion)
+        ("C-TAB" . 'copilot-accept-completion-by-word)
+        ("C-<tab>" . 'copilot-accept-completion-by-word)
+        ("C-n" . 'copilot-next-completion)
+        ("C-p" . 'copilot-previous-completion)))
 
 ;;; Style
 
