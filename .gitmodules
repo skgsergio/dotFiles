@@ -7,3 +7,6 @@
 [submodule "oh-my-zsh-custom/plugins/zsh-ssh"]
 	path = oh-my-zsh-custom/plugins/zsh-ssh
 	url = https://github.com/sunlei/zsh-ssh.git
+[submodule "oh-my-zsh-custom/plugins/zsh-autosuggestions"]
+	path = oh-my-zsh-custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

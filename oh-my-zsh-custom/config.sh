@@ -10,6 +10,9 @@ plugins=($plugins sudo common-aliases command-not-found z git python golang kube
 plugins=($plugins zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
+# zsh-autosuggestions
+plugins=($plugins zsh-autosuggestions)
+
 # zsh-autocomplete
 plugins=($plugins zsh-autocomplete)
 #zstyle ':autocomplete:*' min-delay 0.5
