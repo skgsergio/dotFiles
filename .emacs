@@ -415,7 +415,9 @@
 
 ;;; Style
 
-;; Spaceline
+;; Doom Modeline
+(use-package all-the-icons)
+
 (use-package nerd-icons)
 
 (use-package doom-modeline
