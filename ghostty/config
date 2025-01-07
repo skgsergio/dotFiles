@@ -1,0 +1,6 @@
+theme = MaterialDark
+bold-is-bright = true
+window-decoration = false
+background-opacity = 0.98
+font-size = 11
+font-family = Source Code Pro
