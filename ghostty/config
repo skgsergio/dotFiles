@@ -1,6 +1,12 @@
-theme = MaterialDark
+theme = Tango Adapted
 bold-is-bright = true
+background = #1D1F21
+foreground = #C5C8C6
+selection-invert-fg-bg = true
+cursor-invert-fg-bg = true
+
 window-decoration = false
 background-opacity = 0.98
-font-size = 11
+
+font-size = 12
 font-family = Source Code Pro
