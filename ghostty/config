@@ -1,7 +1,7 @@
 theme = Tango Adapted
 bold-is-bright = true
-background = #1D1F21
-foreground = #C5C8C6
+background = #212121
+foreground = #EEFFFF
 selection-invert-fg-bg = true
 cursor-invert-fg-bg = true
 
