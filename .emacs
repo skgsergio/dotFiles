@@ -160,6 +160,13 @@
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
+;; $PATH from shell when not launched from shell
+(use-package exec-path-from-shell
+  :init
+  (when (not (getenv "TERM"))
+    (exec-path-from-shell-initialize)
+    (message "Loaded PATH from shell.")))
+
 ;; Magit
 (use-package magit)
 
