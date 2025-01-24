@@ -10,3 +10,5 @@ background-opacity = 0.98
 
 font-size = 12
 font-family = Source Code Pro
+
+scrollback-limit = 100000000
