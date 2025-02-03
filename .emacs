@@ -411,6 +411,8 @@
   (copilot :url "https://github.com/copilot-emacs/copilot.el" :rev :newest :branch "main")
   :hook
   (prog-mode . copilot-mode)
+  :config
+  (setq copilot-idle-delay 1)
   :bind
   (:map copilot-completion-map
         ("<tab>" . 'copilot-accept-completion)
