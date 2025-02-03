@@ -5,6 +5,7 @@ foreground = #EEFFFF
 selection-invert-fg-bg = true
 cursor-invert-fg-bg = true
 
+gtk-titlebar = false
 window-decoration = false
 background-opacity = 0.98
 
