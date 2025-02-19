@@ -431,6 +431,8 @@
 
 (use-package doom-modeline
   :config
+  (setq line-number-mode t
+        column-number-mode t)
   (setq doom-modeline-time nil
         doom-modeline-env-version nil)
   :hook
