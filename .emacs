@@ -155,10 +155,11 @@
 
 (setq use-package-always-ensure t)
 
-;; vc-use-package (to be removed in emacs 30)
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package"))
-(require 'vc-use-package)
+;; vc-use-package
+(when (version< emacs-version "30.0")
+  (unless (package-installed-p 'vc-use-package)
+    (package-vc-install "https://github.com/slotThe/vc-use-package"))
+  (require 'vc-use-package))
 
 ;; $PATH from shell when not launched from shell
 (use-package exec-path-from-shell
@@ -239,22 +240,6 @@
 
 ;; htmlize for exporting code highlighted to html
 (use-package htmlize)
-
-;; web-mode
-(use-package web-mode
-  :mode
-  ("\\.phtml$" . web-mode)
-  ("\\.php$" . web-mode)
-  ("\\.[agj]sp$" . web-mode)
-  ("\\.as[cp]x$" . web-mode)
-  ("\\.erb$" . web-mode)
-  ("\\.mustache$" . web-mode)
-  ("\\.djhtml$" . web-mode)
-  ("\\.css$" . web-mode)
-  ("\\.html$" . web-mode)
-  ("\\.js$" . web-mode)
-  ("\\.json$" . web-mode)
-  ("\\.html.j2$" . web-mode))
 
 ;; EditorConfig
 (use-package editorconfig
@@ -389,6 +374,30 @@
   :hook
   (dockerfile-mode . lsp-deferred))
 
+;; web-mode
+(use-package web-mode
+  :mode
+  ("\\.phtml$" . web-mode)
+  ("\\.php$" . web-mode)
+  ("\\.tpl\\'" . web-mode)
+  ("\\.[agj]sp$" . web-mode)
+  ("\\.as[cp]x$" . web-mode)
+  ("\\.erb$" . web-mode)
+  ("\\.mustache$" . web-mode)
+  ("\\.djhtml$" . web-mode)
+  ("\\.html$" . web-mode)
+  ("\\.html.j2$" . web-mode)
+  ("\\.vue$" . web-mode)
+  :hook
+  (web-mode . lsp-deferred))
+
+;; JavaScript
+(use-package js2-mode
+  :mode
+  ("\\.js$" . js2-mode)
+  :hook
+  (js2-mode . lsp-deferred))
+
 ;; Typescript
 (use-package typescript-mode
   :hook
@@ -405,7 +414,6 @@
   (tinybird-mode :url "https://github.com/skgsergio/tinybird-mode" :rev :newest))
 
 ;;; AI
-
 (use-package copilot
   :vc
   (copilot :url "https://github.com/copilot-emacs/copilot.el" :rev :newest :branch "main")
@@ -459,6 +467,9 @@
 ;; Keybindings for increasing font size (for screen sharing and so)
 (global-set-key (kbd "M-+") (lambda () (interactive) (set-face-attribute 'default nil :height (+ my-font-size 20))))
 (global-set-key (kbd "M--") (lambda () (interactive) (set-face-attribute 'default nil :height my-font-size)))
+
+;; Remove mmm-mode ugly submode background
+(add-hook 'mmm-mode-hook (lambda () (set-face-background 'mmm-default-submode-face nil)))
 
 ;;; Run GC and set a lower GC threshold
 (garbage-collect)
