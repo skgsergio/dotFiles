@@ -13,9 +13,7 @@
 ;;; Set a high GC threshold to have a quicker boot time
 (setq gc-cons-threshold 1000000000)
 
-;;; Native Comp
-
-;; Compile all site-lisp on demand
+;;; Native Comp: Compile all site-lisp on demand
 (setq native-comp-deferred-compilation t)
 (setq native-compile-prune-cache t)
 
@@ -441,7 +439,8 @@
   :config
   (setq line-number-mode t
         column-number-mode t)
-  (setq doom-modeline-time nil
+  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project
+        doom-modeline-time nil
         doom-modeline-env-version nil)
   :hook
   (after-init . doom-modeline-mode))
