@@ -49,8 +49,14 @@ fi
 export EDITOR="emacs"
 
 alias o="xdg-open"
-alias difff="git diff --no-index"
 alias ip="ip --color=auto"
+
+if command -v delta &> /dev/null; then
+    alias difff="delta"
+    export KUBECTL_EXTERNAL_DIFF="delta --default-language=yaml"
+else
+    alias difff="diff --color=auto -rupN"
+fi
 
 tfdocs() {
     docker run --rm --volume "$(pwd):/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:latest markdown /terraform-docs
